@@ -41,8 +41,8 @@ Ensure the following tools are installed:
       PORT=3010
       SECRET_KEY=
 
-      DB_NAME=soofia
-      DB_USER=soofia
+      DB_NAME=
+      DB_USER=
       DB_PASS=password
       DB_HOST=postgres
       DB_PORT=5432
