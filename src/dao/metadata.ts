@@ -11,7 +11,7 @@ import { OPERATIVE_CLIENT } from './OperativeClient/metadata';
 import { PERMISSION } from './Permission/metadata';
 import { PYME_PRODUCT } from './PymeProduct/metadata';
 import { PYME_PROD_USAGE } from './PymeProductUsage/metadata';
-import { RISK } from './Risk/metadata';
+import { RISK_PRODUCT } from './RiskProduct/metadata';
 import { SOCIAL_SECURITY } from './SocialSecurity/metadata';
 import { TEAM } from './Team/metadata';
 import { USER } from './User/metadata';
@@ -30,7 +30,7 @@ export {
    PERMISSION,
    PYME_PRODUCT,
    PYME_PROD_USAGE,
-   RISK,
+   RISK_PRODUCT,
    SOCIAL_SECURITY,
    TEAM,
    USER,

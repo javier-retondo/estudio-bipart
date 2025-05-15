@@ -11,7 +11,7 @@ import { OperativeClient } from './OperativeClient/model';
 import { Permission } from './Permission/model';
 import { PymeProduct } from './PymeProduct/model';
 import { PymeProdUsage } from './PymeProductUsage/model';
-import { Risk } from './Risk/model';
+import { RiskProduct } from './RiskProduct/model';
 import { SocialSecurity } from './SocialSecurity/model';
 import { Team } from './Team/model';
 import { User } from './User/model';
@@ -30,7 +30,7 @@ export {
    Permission,
    PymeProduct,
    PymeProdUsage,
-   Risk,
+   RiskProduct,
    SocialSecurity,
    Team,
    User,

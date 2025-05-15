@@ -11,7 +11,7 @@ import { IOperativeClient } from './OperativeClient/interface';
 import { IPermission } from './Permission/interface';
 import { IPymeProduct } from './PymeProduct/interface';
 import { IPymeProdUsage } from './PymeProductUsage/interface';
-import { IRisk } from './Risk/interface';
+import { IRiskProduct } from './RiskProduct/interface';
 import { ISocialSecurity } from './SocialSecurity/interface';
 import { ITeam } from './Team/interface';
 import { IUser } from './User/interface';
@@ -30,7 +30,7 @@ export {
    IPermission,
    IPymeProduct,
    IPymeProdUsage,
-   IRisk,
+   IRiskProduct,
    ISocialSecurity,
    ITeam,
    IUser,
