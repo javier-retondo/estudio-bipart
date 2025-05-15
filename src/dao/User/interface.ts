@@ -1,0 +1,37 @@
+export type IUser = {
+   id?: number;
+   firstname: string;
+   lastname: string;
+   username: string;
+   email: string;
+   phone?: string;
+   is_admin: boolean;
+   password: string;
+   is_pass_provisory: boolean;
+   created_at?: Date;
+   updated_at?: Date | null;
+   deleted_at?: Date | null;
+   created_by?: number | null;
+   updated_by?: number | null;
+   deleted_by?: number | null;
+};
+
+type UserColumnAliasKeys =
+   | 'ID'
+   | 'FIRSTNAME'
+   | 'LASTNAME'
+   | 'USERNAME'
+   | 'EMAIL'
+   | 'PHONE'
+   | 'ID_ADMIN'
+   | 'PASSWORD'
+   | 'IS_PASSWORD_PROVISORY'
+   | 'CREATED_AT'
+   | 'UPDATED_AT'
+   | 'DELETED_AT'
+   | 'CREATED_BY'
+   | 'UPDATED_BY'
+   | 'DELETED_BY';
+export type IUserColumnsAliases = { [key in UserColumnAliasKeys]: keyof IUser };
+
+export type IUserAssociations = object;
