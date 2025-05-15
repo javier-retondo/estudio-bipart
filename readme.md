@@ -45,8 +45,8 @@ Ensure the following tools are installed:
       DB_USER=
       DB_PASS=
       DB_HOST=
-      DB_PORT=5432
-      API_BASE_URL_V1=/api/v1/bipart
+      DB_PORT=
+      API_BASE_URL_V1=
 
       NODE_ENV=development
 
