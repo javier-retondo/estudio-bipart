@@ -43,8 +43,8 @@ Ensure the following tools are installed:
 
       DB_NAME=
       DB_USER=
-      DB_PASS=password
-      DB_HOST=postgres
+      DB_PASS=
+      DB_HOST=
       DB_PORT=5432
       API_BASE_URL_V1=/api/v1/bipart
 
