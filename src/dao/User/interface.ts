@@ -1,3 +1,5 @@
+import { IPermission } from '../interfaces';
+
 export type IUser = {
    id?: number;
    firstname: string;
@@ -17,6 +19,9 @@ export type IUser = {
    suspended_at?: Date | null;
    suspended_by?: number | null;
    suspended_reason?: string | null;
+
+   // Associations
+   Permissions?: IPermission[];
 };
 
 type UserColumnAliasKeys =
@@ -40,4 +45,6 @@ type UserColumnAliasKeys =
    | 'SUSPENDED_REASON';
 export type IUserColumnsAliases = { [key in UserColumnAliasKeys]: keyof IUser };
 
-export type IUserAssociations = object;
+type UserAssociationKeys = 'PERMISSIONS';
+
+export type IUserAssociations = { [key in UserAssociationKeys]: keyof IUser };

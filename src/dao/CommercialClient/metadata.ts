@@ -10,7 +10,7 @@ export const COMMERCIAL_CLIENT: IMetadata<
       ID: 'id',
       FISCAL_NAME: 'fiscal_name',
       FISCAL_NUMBER: 'fiscal_number',
-      PERSON_TYPE_ID: 'person_type_id',
+      IS_PHYSICAL_PERSON: 'is_physical_person',
       VAT_CONDITION_ID: 'vat_condition_id',
       EMAIL: 'email',
       PHONE: 'phone',
@@ -30,5 +30,8 @@ export const COMMERCIAL_CLIENT: IMetadata<
    },
    PLURAL: 'CommercialClients',
    SINGULAR: 'CommercialClient',
-   ASSOCIATIONS: {},
+   ASSOCIATIONS: {
+      OPERATIVE_CLIENT: 'OperativeClients',
+      VAT_CONDITION: 'VatCondition',
+   },
 };

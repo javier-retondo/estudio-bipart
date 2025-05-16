@@ -14,5 +14,7 @@ export const DOMESTIC_SERVICE: IMetadata<
    },
    PLURAL: 'DomesticServices',
    SINGULAR: 'DomesticService',
-   ASSOCIATIONS: {},
+   ASSOCIATIONS: {
+      USER: 'User',
+   },
 };

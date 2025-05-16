@@ -10,7 +10,7 @@ export const OPERATIVE_CLIENT: IMetadata<
       ID: 'id',
       FISCAL_NAME: 'fiscal_name',
       FISCAL_NUMBER: 'fiscal_number',
-      PERSON_TYPE_ID: 'person_type_id',
+      IS_PHYSICAL_PERSON: 'is_physical_person',
       BORN_DATE: 'born_date',
       OBSERVATIONS: 'observations',
       COMMERCIAL_CLIENT_ID: 'commercial_client_id',
@@ -32,5 +32,12 @@ export const OPERATIVE_CLIENT: IMetadata<
    },
    PLURAL: 'OperativeClients',
    SINGULAR: 'OperativeClient',
-   ASSOCIATIONS: {},
+   ASSOCIATIONS: {
+      COMMERCIAL_CLIENT: 'CommercialClient',
+      DOMESTIC_SERVICE: 'DomesticService',
+      SOCIAL_SECURITY: 'SocialSecurity',
+      RISK_PRODUCT: 'RiskProduct',
+      BALANCE: 'Balance',
+      PYME_PRODUCT: 'PymeProduct',
+   },
 };

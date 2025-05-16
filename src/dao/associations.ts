@@ -1,5 +1,41 @@
+import { initBalanceAssociations } from './Balance/associations';
+import { initCommercialClientAssociations } from './CommercialClient/associations';
+import { initDigitalCertAssociations } from './DigitalCert/associations';
+import { initDivisionAssociations } from './Division/associations';
+import { initDomesticServiceAssociations } from './DomesticService/associations';
+import { initGrossIncomeAssociations } from './GrossIncome/associations';
+import { initLogAssociations } from './Log/associations';
+import { initModuleAssociations } from './Module/associations';
+import { initMonotributistAssociations } from './Monotributist/associations';
+import { initOperativeClientAssociations } from './OperativeClient/associations';
+import { initPermissionAssociations } from './Permission/associations';
+import { initPymeProductAssociations } from './PymeProduct/associations';
+import { initPymeProductUsageAssociations } from './PymeProductUsage/associations';
+import { initRiskProductAssociations } from './RiskProduct/associations';
+import { initSocialSecurityAssociations } from './SocialSecurity/associations';
+import { initTeamAssociations } from './Team/associations';
+import { initUserAssociations } from './User/associations';
+import { initVatConditionAssociations } from './VatCondition/associations';
+
 export const InitAllAssociations = () => {
    console.log('🚀 Associations is starting...');
-
+   initBalanceAssociations();
+   initCommercialClientAssociations();
+   initDigitalCertAssociations();
+   initDivisionAssociations();
+   initDomesticServiceAssociations();
+   initGrossIncomeAssociations();
+   initLogAssociations();
+   initModuleAssociations();
+   initMonotributistAssociations();
+   initOperativeClientAssociations();
+   initPermissionAssociations();
+   initPymeProductAssociations();
+   initPymeProductUsageAssociations();
+   initRiskProductAssociations();
+   initSocialSecurityAssociations();
+   initTeamAssociations();
+   initUserAssociations();
+   initVatConditionAssociations();
    console.log('✅ Associations is done!');
 };

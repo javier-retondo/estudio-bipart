@@ -25,5 +25,7 @@ export const USER: IMetadata<IUserColumnsAliases, IUserAssociations> = {
    },
    PLURAL: 'Users',
    SINGULAR: 'User',
-   ASSOCIATIONS: {},
+   ASSOCIATIONS: {
+      PERMISSIONS: 'Permissions',
+   },
 };

@@ -1,4 +1,6 @@
+import { Team } from '../models';
 import { IBalanceAssociations } from './interface';
+import { BALANCE } from './metadata';
 
 export const balanceIncludes: {
    model: any;
@@ -9,4 +11,10 @@ export const balanceIncludes: {
       as: string;
       attributes: string[];
    }[];
-}[] = [];
+}[] = [
+   {
+      model: Team,
+      as: BALANCE.ASSOCIATIONS.TEAM,
+      attributes: Object.values(BALANCE.COLUMNS),
+   },
+];

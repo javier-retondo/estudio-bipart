@@ -1,7 +1,45 @@
 import { InitAllAssociations } from '../dao/associations';
-import {} from '../dao/models';
+import {
+   Balance,
+   CommercialClient,
+   DigitalCert,
+   Division,
+   DomesticService,
+   GrossIncome,
+   Log,
+   Module,
+   Monotributist,
+   OperativeClient,
+   Permission,
+   PymeProduct,
+   PymeProdUsage,
+   RiskProduct,
+   SocialSecurity,
+   Team,
+   User,
+   VatCondition,
+} from '../dao/models';
 
-const modelsMap: any = {};
+const modelsMap = {
+   Balance,
+   CommercialClient,
+   DigitalCert,
+   Division,
+   DomesticService,
+   GrossIncome,
+   Log,
+   Module,
+   Monotributist,
+   OperativeClient,
+   Permission,
+   PymeProduct,
+   PymeProdUsage,
+   RiskProduct,
+   SocialSecurity,
+   Team,
+   User,
+   VatCondition,
+};
 
 const initAllModels = async (
    force?: boolean,
@@ -23,12 +61,10 @@ const initAllModels = async (
       console.log(`   🔄 Sincronizando modelo: ${modelName}`);
       await model.sync({ force, alter });
    } else {
-      /*
       for (const [name, model] of Object.entries(modelsMap)) {
          console.log(`   🔄 Sincronizando modelo: ${name}`);
-       await model.sync({ force, alter });
+         await model.sync({ force, alter });
       }
-      */
    }
 
    console.log('✅ Modelos sincronizados correctamente.');

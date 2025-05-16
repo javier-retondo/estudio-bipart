@@ -1,8 +1,17 @@
+import {
+   IBalance,
+   ICommercialClient,
+   IDomesticService,
+   IPymeProdUsage,
+   IRiskProduct,
+   ISocialSecurity,
+} from '../interfaces';
+
 export type IOperativeClient = {
    id?: number;
    fiscal_name: string;
    fiscal_number: string;
-   person_type_id: number;
+   is_physical_person: boolean;
    activity: string;
    born_date: Date;
    observations?: string;
@@ -22,13 +31,21 @@ export type IOperativeClient = {
    suspended_at?: Date | null;
    suspended_by?: number | null;
    suspended_reason?: string | null;
+
+   // Associations
+   CommercialClient?: ICommercialClient;
+   DomesticService?: IDomesticService;
+   SocialSecurity?: ISocialSecurity;
+   RiskProduct?: IRiskProduct;
+   Balance?: IBalance;
+   PymeProduct?: IPymeProdUsage;
 };
 
 type OperativeClientColumnAliasKeys =
    | 'ID'
    | 'FISCAL_NAME'
    | 'FISCAL_NUMBER'
-   | 'PERSON_TYPE_ID'
+   | 'IS_PHYSICAL_PERSON'
    | 'BORN_DATE'
    | 'OBSERVATIONS'
    | 'COMMERCIAL_CLIENT_ID'
@@ -51,4 +68,14 @@ export type IOperativeClientColumnsAliases = {
    [key in OperativeClientColumnAliasKeys]: keyof IOperativeClient;
 };
 
-export type IOperativeClientAssociations = object;
+type OperativeClientAssociationKeys =
+   | 'COMMERCIAL_CLIENT'
+   | 'DOMESTIC_SERVICE'
+   | 'SOCIAL_SECURITY'
+   | 'RISK_PRODUCT'
+   | 'BALANCE'
+   | 'PYME_PRODUCT';
+
+export type IOperativeClientAssociations = {
+   [key in OperativeClientAssociationKeys]: keyof IOperativeClient;
+};

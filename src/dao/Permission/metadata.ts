@@ -17,5 +17,9 @@ export const PERMISSION: IMetadata<IPermissionColumnsAliases, IPermissionAssocia
    },
    PLURAL: 'Permissions',
    SINGULAR: 'Permission',
-   ASSOCIATIONS: {},
+   ASSOCIATIONS: {
+      USER: 'User',
+      MODULE: 'Module',
+      COMMERCIAL_CLIENT: 'CommercialClient',
+   },
 };

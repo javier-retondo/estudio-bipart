@@ -6,5 +6,7 @@ export const RISK_PRODUCT: IMetadata<IRiskProductColumnsAliases, IRiskProductAss
    COLUMNS: { ID: 'id', OPERATIVE_CLIENT_ID: 'operative_client_id', TEAM_ID: 'team_id' },
    PLURAL: 'RiskProducts',
    SINGULAR: 'RiskProduct',
-   ASSOCIATIONS: {},
+   ASSOCIATIONS: {
+      TEAM: 'Team',
+   },
 };

@@ -14,5 +14,7 @@ export const SOCIAL_SECURITY: IMetadata<
    },
    PLURAL: 'SocialSecurities',
    SINGULAR: 'SocialSecurity',
-   ASSOCIATIONS: {},
+   ASSOCIATIONS: {
+      USER: 'User',
+   },
 };

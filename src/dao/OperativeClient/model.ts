@@ -12,7 +12,7 @@ AllOperativeClient.init(
       id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
       fiscal_name: { type: DataTypes.STRING(100), allowNull: false },
       fiscal_number: { type: DataTypes.STRING(20), allowNull: false },
-      person_type_id: { type: DataTypes.INTEGER, allowNull: false },
+      is_physical_person: { type: DataTypes.BOOLEAN, allowNull: false },
       activity: { type: DataTypes.STRING(255), allowNull: false },
       born_date: { type: DataTypes.DATEONLY, allowNull: false },
       observations: { type: DataTypes.STRING(255), allowNull: true },

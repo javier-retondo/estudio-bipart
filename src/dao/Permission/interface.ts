@@ -1,3 +1,5 @@
+import { ICommercialClient, IModule, IUser } from '../interfaces';
+
 export type IPermission = {
    id?: number;
    module_id: number;
@@ -9,6 +11,11 @@ export type IPermission = {
    allow_create: boolean;
    allow_update: boolean;
    allow_delete: boolean;
+
+   // Associations
+   User?: IUser;
+   Module?: IModule;
+   CommercialClient?: ICommercialClient;
 };
 
 type PermissionColumnAliasKeys =
@@ -24,4 +31,5 @@ type PermissionColumnAliasKeys =
    | 'ALLOW_DELETE';
 export type IPermissionColumnsAliases = { [key in PermissionColumnAliasKeys]: keyof IPermission };
 
-export type IPermissionAssociations = object;
+type PermissionAssociationKeys = 'USER' | 'MODULE' | 'COMMERCIAL_CLIENT';
+export type IPermissionAssociations = { [key in PermissionAssociationKeys]: keyof IPermission };

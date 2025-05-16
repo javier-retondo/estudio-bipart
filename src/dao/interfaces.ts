@@ -15,7 +15,7 @@ import { IRiskProduct } from './RiskProduct/interface';
 import { ISocialSecurity } from './SocialSecurity/interface';
 import { ITeam } from './Team/interface';
 import { IUser } from './User/interface';
-
+import { IVatCondition } from './VatCondition/interface';
 export {
    IBalance,
    ICommercialClient,
@@ -34,4 +34,5 @@ export {
    ISocialSecurity,
    ITeam,
    IUser,
+   IVatCondition,
 };

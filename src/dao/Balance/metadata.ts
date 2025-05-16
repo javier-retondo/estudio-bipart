@@ -11,5 +11,7 @@ export const BALANCE: IMetadata<IBalanceColumnsAliases, IBalanceAssociations> = 
    },
    PLURAL: 'Balances',
    SINGULAR: 'Balance',
-   ASSOCIATIONS: {},
+   ASSOCIATIONS: {
+      TEAM: 'Team',
+   },
 };

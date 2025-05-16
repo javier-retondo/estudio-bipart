@@ -15,6 +15,7 @@ import { RISK_PRODUCT } from './RiskProduct/metadata';
 import { SOCIAL_SECURITY } from './SocialSecurity/metadata';
 import { TEAM } from './Team/metadata';
 import { USER } from './User/metadata';
+import { VAT_CONDITION } from './VatCondition/metadata';
 
 export {
    BALANCE,
@@ -34,4 +35,5 @@ export {
    SOCIAL_SECURITY,
    TEAM,
    USER,
+   VAT_CONDITION,
 };

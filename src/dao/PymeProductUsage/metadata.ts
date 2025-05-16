@@ -16,5 +16,12 @@ export const PYME_PROD_USAGE: IMetadata<IPymeProdUsageColumnsAliases, IPymeProdU
       },
       PLURAL: 'PymeProdUsages',
       SINGULAR: 'PymeProdUsage',
-      ASSOCIATIONS: {},
+      ASSOCIATIONS: {
+         USER: 'User',
+         PYME_PRODUCT: 'PymeProduct',
+         TEAM: 'Team',
+         DIVISION: 'Division',
+         GROSS_INCOME: 'GrossIncome',
+         MONOTRIBUTIST: 'Monotributist',
+      },
    };

@@ -1,3 +1,5 @@
+import { IDivision, IGrossIncome, IMonotributist, IPymeProduct, ITeam, IUser } from '../interfaces';
+
 export type IPymeProdUsage = {
    id?: number;
    operative_client_id: number;
@@ -7,6 +9,14 @@ export type IPymeProdUsage = {
    gross_income_id: number;
    monotributist_id: number;
    user_id: number;
+
+   // Associations
+   User?: IUser;
+   PymeProduct?: IPymeProduct;
+   Team?: ITeam;
+   Division?: IDivision;
+   GrossIncome?: IGrossIncome;
+   Monotributist?: IMonotributist;
 };
 
 type PymeProdUsageColumnAliasKeys =
@@ -22,4 +32,14 @@ export type IPymeProdUsageColumnsAliases = {
    [key in PymeProdUsageColumnAliasKeys]: keyof IPymeProdUsage;
 };
 
-export type IPymeProdUsageAssociations = object;
+type PymeProdUsageAssociationsKeys =
+   | 'USER'
+   | 'PYME_PRODUCT'
+   | 'TEAM'
+   | 'DIVISION'
+   | 'GROSS_INCOME'
+   | 'MONOTRIBUTIST';
+
+export type IPymeProdUsageAssociations = {
+   [key in PymeProdUsageAssociationsKeys]: keyof IPymeProdUsage;
+};

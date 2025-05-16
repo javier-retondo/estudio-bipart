@@ -1,8 +1,11 @@
+import { IOperativeClient } from '../interfaces';
+import { IVatCondition } from '../VatCondition/interface';
+
 export type ICommercialClient = {
    id?: number;
    fiscal_name: string;
    fiscal_number: string;
-   person_type_id: number;
+   is_physical_person: boolean;
    vat_condition_id: number;
    email?: string;
    phone?: string;
@@ -19,13 +22,17 @@ export type ICommercialClient = {
    suspended_at?: Date | null;
    suspended_by?: number | null;
    suspended_reason?: string | null;
+
+   // Associations
+   OperativeClients?: IOperativeClient[];
+   VatCondition?: IVatCondition;
 };
 
 type CommercialClientColumnAliasKeys =
    | 'ID'
    | 'FISCAL_NAME'
    | 'FISCAL_NUMBER'
-   | 'PERSON_TYPE_ID'
+   | 'IS_PHYSICAL_PERSON'
    | 'VAT_CONDITION_ID'
    | 'EMAIL'
    | 'PHONE'
@@ -46,4 +53,8 @@ export type ICommercialClientColumnsAliases = {
    [key in CommercialClientColumnAliasKeys]: keyof ICommercialClient;
 };
 
-export type ICommercialClientAssociations = object;
+type CommercialClientAssociationAliasKeys = 'OPERATIVE_CLIENT' | 'VAT_CONDITION';
+
+export type ICommercialClientAssociations = {
+   [key in CommercialClientAssociationAliasKeys]: keyof ICommercialClient;
+};

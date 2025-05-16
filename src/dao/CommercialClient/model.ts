@@ -12,7 +12,7 @@ AllCommercialClient.init(
       id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
       fiscal_name: { type: DataTypes.STRING(100), allowNull: false },
       fiscal_number: { type: DataTypes.STRING(20), allowNull: false },
-      person_type_id: { type: DataTypes.INTEGER, allowNull: false },
+      is_physical_person: { type: DataTypes.BOOLEAN, allowNull: false },
       vat_condition_id: { type: DataTypes.INTEGER, allowNull: false },
       email: { type: DataTypes.STRING(100), allowNull: true },
       phone: { type: DataTypes.STRING(20), allowNull: true },
