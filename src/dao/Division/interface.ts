@@ -7,6 +7,9 @@ export type IDivision = {
    created_by: number;
    updated_by?: number | null;
    deleted_by?: number | null;
+   suspended_at?: Date | null;
+   suspended_by?: number | null;
+   suspended_reason?: string | null;
 };
 
 type DivisionColumnAliasKeys =
@@ -17,7 +20,10 @@ type DivisionColumnAliasKeys =
    | 'DELETED_AT'
    | 'CREATED_BY'
    | 'UPDATED_BY'
-   | 'DELETED_BY';
+   | 'DELETED_BY'
+   | 'SUSPENDED_AT'
+   | 'SUSPENDED_BY'
+   | 'SUSPENDED_REASON';
 export type IDivisionColumnsAliases = { [key in DivisionColumnAliasKeys]: keyof IDivision };
 
 export type IDivisionAssociations = object;

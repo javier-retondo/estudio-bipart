@@ -15,6 +15,9 @@ export type IDigitalCert = {
    created_by?: number | null;
    updated_by?: number | null;
    deleted_by?: number | null;
+   suspended_at?: Date | null;
+   suspended_by?: number | null;
+   suspended_reason?: string | null;
 };
 
 type DigitalCertColumnAliasKeys =
@@ -33,7 +36,10 @@ type DigitalCertColumnAliasKeys =
    | 'DELETED_AT'
    | 'CREATED_BY'
    | 'UPDATED_BY'
-   | 'DELETED_BY';
+   | 'DELETED_BY'
+   | 'SUSPENDED_AT'
+   | 'SUSPENDED_BY'
+   | 'SUSPENDED_REASON';
 export type IDigitalCertColumnsAliases = {
    [key in DigitalCertColumnAliasKeys]: keyof IDigitalCert;
 };

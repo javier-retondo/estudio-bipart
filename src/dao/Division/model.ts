@@ -17,6 +17,9 @@ AllDivision.init(
       created_by: { type: DataTypes.INTEGER, allowNull: false },
       updated_by: { type: DataTypes.INTEGER, allowNull: true },
       deleted_by: { type: DataTypes.INTEGER, allowNull: true },
+      suspended_at: { type: DataTypes.DATE, allowNull: true },
+      suspended_by: { type: DataTypes.INTEGER, allowNull: true },
+      suspended_reason: { type: DataTypes.STRING(255), allowNull: true },
    },
    {
       sequelize: sequelize,

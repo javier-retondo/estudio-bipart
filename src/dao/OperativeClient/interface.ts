@@ -19,6 +19,9 @@ export type IOperativeClient = {
    created_by: number;
    updated_by?: number | null;
    deleted_by?: number | null;
+   suspended_at?: Date | null;
+   suspended_by?: number | null;
+   suspended_reason?: string | null;
 };
 
 type OperativeClientColumnAliasKeys =
@@ -40,7 +43,10 @@ type OperativeClientColumnAliasKeys =
    | 'DELETED_AT'
    | 'CREATED_BY'
    | 'UPDATED_BY'
-   | 'DELETED_BY';
+   | 'DELETED_BY'
+   | 'SUSPENDED_AT'
+   | 'SUSPENDED_BY'
+   | 'SUSPENDED_REASON';
 export type IOperativeClientColumnsAliases = {
    [key in OperativeClientColumnAliasKeys]: keyof IOperativeClient;
 };

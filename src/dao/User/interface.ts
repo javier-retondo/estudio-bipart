@@ -14,6 +14,9 @@ export type IUser = {
    created_by?: number | null;
    updated_by?: number | null;
    deleted_by?: number | null;
+   suspended_at?: Date | null;
+   suspended_by?: number | null;
+   suspended_reason?: string | null;
 };
 
 type UserColumnAliasKeys =
@@ -31,7 +34,10 @@ type UserColumnAliasKeys =
    | 'DELETED_AT'
    | 'CREATED_BY'
    | 'UPDATED_BY'
-   | 'DELETED_BY';
+   | 'DELETED_BY'
+   | 'SUSPENDED_AT'
+   | 'SUSPENDED_BY'
+   | 'SUSPENDED_REASON';
 export type IUserColumnsAliases = { [key in UserColumnAliasKeys]: keyof IUser };
 
 export type IUserAssociations = object;
