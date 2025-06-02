@@ -5,7 +5,7 @@ import { COMMERCIAL_CLIENT } from './metadata';
 import { CommercialClient } from './model';
 
 export const initCommercialClientAssociations = () => {
-   console.log('🚀 CommercialClient Associations is starting...');
+   console.log('   🔄CommercialClient Associations is starting...');
    CommercialClient.hasMany(OperativeClient, {
       sourceKey: COMMERCIAL_CLIENT.COLUMNS.ID,
       foreignKey: OPERATIVE_CLIENT.COLUMNS.COMMERCIAL_CLIENT_ID,

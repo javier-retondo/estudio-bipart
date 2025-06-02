@@ -1,3 +1,3 @@
 export const initVatConditionAssociations = () => {
-   console.log('🚀 VatCondition Associations is starting...');
+   console.log('   🔄VatCondition Associations is starting...');
 };

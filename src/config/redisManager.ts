@@ -35,7 +35,7 @@ class RedisManager {
       return await this.client.get(key);
    }
 
-   public async del(key: string): Promise<number> {
+   public async del(key: string | string[]): Promise<number> {
       return await this.client.del(key);
    }
 
@@ -45,6 +45,14 @@ class RedisManager {
 
    public async sendCommand(args: string[]): Promise<any> {
       return await this.client.sendCommand(args);
+   }
+
+   public async sadd(key: string, value: string): Promise<number> {
+      return await this.client.sAdd(key, value);
+   }
+
+   public async smembers(key: string): Promise<string[]> {
+      return await this.client.sMembers(key);
    }
 }
 

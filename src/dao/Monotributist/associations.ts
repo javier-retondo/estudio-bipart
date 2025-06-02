@@ -1,3 +1,3 @@
 export const initMonotributistAssociations = () => {
-   console.log('🚀 Monotributist Associations is starting...');
+   console.log('   🔄Monotributist Associations is starting...');
 };

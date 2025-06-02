@@ -103,7 +103,7 @@ npm run generate-api
 | `npm run pre-commit`                                                              | Run lint-staged before committing changes.                              |
 | `npm run generate-api`                                                            | Generate an API component with routes, controllers, DTOs, and services. |
 | `npm run generate-model <ModelName>`                                              | Generate models in the DAO folder.                                      |
-| `npm run seedDefaultData`                                                         | Seed and update default data.                                           |
+| `npm run seed`                                                                    | Seed and update default data.                                           |
 | `npm run syncModels`                                                              | Sync all models into database (default alter: true, force: false).      |
 | `npm run syncModels -- <ModelName> --alter (-a) --force (-f) --associations (-A)` | Sync all models into database with options.                             |
 | `npm run encrypt <Data>`                                                          | Encrypt data -> output format `<dataEncrypted/iv hex>`.                 |

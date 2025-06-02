@@ -1,3 +1,3 @@
 export const initModuleAssociations = () => {
-   console.log('🚀 Module Associations is starting...');
+   console.log('   🔄Module Associations is starting...');
 };

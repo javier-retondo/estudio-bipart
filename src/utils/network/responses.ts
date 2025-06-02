@@ -55,7 +55,6 @@ class Responses {
             },
          });
       } else {
-         console.log('props.body :>> ', props.body);
          props.res.status(props.status || 200).send({
             error: false,
             status: props.status || 200,

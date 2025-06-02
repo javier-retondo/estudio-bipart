@@ -51,7 +51,7 @@ const initAllModels = async (
       InitAllAssociations();
    }
 
-   console.log('🚀 Iniciando sincronización de modelos...');
+   console.log('   🔄Iniciando sincronización de modelos...');
    if (modelName) {
       const model = modelsMap[modelName as keyof typeof modelsMap];
       if (!model) {

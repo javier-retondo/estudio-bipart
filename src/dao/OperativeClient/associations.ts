@@ -19,7 +19,7 @@ import { OPERATIVE_CLIENT } from './metadata';
 import { OperativeClient } from './model';
 
 export const initOperativeClientAssociations = () => {
-   console.log('🚀 OperativeClient Associations is starting...');
+   console.log('   🔄OperativeClient Associations is starting...');
 
    OperativeClient.belongsTo(CommercialClient, {
       foreignKey: OPERATIVE_CLIENT.COLUMNS.COMMERCIAL_CLIENT_ID,

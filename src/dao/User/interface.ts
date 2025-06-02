@@ -1,4 +1,4 @@
-import { IPermission } from '../interfaces';
+import { IModule, IPermission } from '../interfaces';
 
 export type IUser = {
    id?: number;
@@ -8,7 +8,7 @@ export type IUser = {
    email: string;
    phone?: string;
    is_admin: boolean;
-   password: string;
+   password?: string;
    is_pass_provisory: boolean;
    created_at?: Date;
    updated_at?: Date | null;
@@ -22,6 +22,7 @@ export type IUser = {
 
    // Associations
    Permissions?: IPermission[];
+   Modules?: IModule[];
 };
 
 type UserColumnAliasKeys =

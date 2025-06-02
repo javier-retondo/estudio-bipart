@@ -1,3 +1,3 @@
 export const initDigitalCertAssociations = () => {
-   console.log('🚀 DigitalCert Associations is starting...');
+   console.log('   🔄DigitalCert Associations is starting...');
 };

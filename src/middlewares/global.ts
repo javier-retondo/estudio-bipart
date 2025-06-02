@@ -3,7 +3,8 @@ import { plainToInstance } from 'class-transformer';
 import { error } from '../utils/network/responses';
 import { validate } from 'class-validator';
 import { redisClient } from '../config/redisManager';
-//import { ISessionData } from '../utils/interfaces/general';
+import jwt from 'jsonwebtoken';
+import { userService } from '../dao/User/service';
 
 export class GlobalMW {
    async verifyToken(req: Request, res: Response, next: NextFunction) {
@@ -28,19 +29,42 @@ export class GlobalMW {
       try {
          const sessionDataRedis = await redisClient.get(`session:${String(token)}`);
          if (sessionDataRedis) {
-            //const session: ISessionData = JSON.parse(sessionDataRedis);
-
-            req.body.userData = {
-               Use_Token: String(token),
-               data: '',
-            };
+            const userData = JSON.parse(sessionDataRedis);
+            const validToken = await redisClient.get(`user_tokens:${userData.id}`);
+            if (!validToken || validToken !== token) {
+               throw new Error('Token is invalid or expired');
+            }
+            console.log('------------ Cached User Data -------------');
+            req.body.userData = userData;
          } else {
-            const loginCheck = { status: 'success', data: null, message: '' };
+            const decoded = jwt.verify(token, process.env.SECRET_KEY || 'defaultsecret');
+            if (
+               typeof decoded === 'object' &&
+               decoded !== null &&
+               'id' in decoded &&
+               'username' in decoded
+            ) {
+               const tokenData: { id: number; username: string } = {
+                  id: (decoded as any).id,
+                  username: (decoded as any).username,
+               };
+               const validToken = await redisClient.get(`user_tokens:${tokenData.id}`);
 
-            req.body.userData = {
-               Use_Token: String(token),
-               data: loginCheck.data,
-            };
+               if (!validToken || validToken !== token) {
+                  throw new Error('Token is invalid or expired');
+               }
+               const userData = await userService.getUserById(tokenData.id);
+               if (!userData) {
+                  throw new Error('User not found');
+               }
+               if (userData.deleted_at || userData.suspended_at) {
+                  throw new Error('User is inactive or suspended');
+               }
+               req.body.userData = userData;
+               await redisClient.set(`session:${String(token)}`, JSON.stringify(userData), 60);
+            } else {
+               throw new Error('Token payload does not contain required user data');
+            }
          }
          next();
       } catch (error) {

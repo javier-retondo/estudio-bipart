@@ -1,3 +1,3 @@
 export const initGrossIncomeAssociations = () => {
-   console.log('🚀 GrossIncome Associations is starting...');
+   console.log('   🔄GrossIncome Associations is starting...');
 };

@@ -1,3 +1,3 @@
 export const initPymeProductAssociations = () => {
-   console.log('🚀 PymeProduct Associations is starting...');
+   console.log('   🔄PymeProduct Associations is starting...');
 };

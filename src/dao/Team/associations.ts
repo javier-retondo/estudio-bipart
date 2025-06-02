@@ -1,3 +1,3 @@
 export const initTeamAssociations = () => {
-   console.log('🚀 Team Associations is starting...');
+   console.log('   🔄Team Associations is starting...');
 };

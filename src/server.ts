@@ -14,7 +14,7 @@ const staticFolderPath = path.join(__dirname, '..', 'public');
 export class Server extends ConfigServer {
    public app: express.Application;
    public port: number = this.getNumberEnvironment('PORT');
-   public apiBaseUrlV1 = this.getEnvironment('API_BASE_URL_V1') || '/api/v1/reports';
+   public apiBaseUrlV1 = this.getEnvironment('API_BASE_URL_V1') || '/api/v1';
 
    constructor() {
       super();
@@ -34,7 +34,7 @@ export class Server extends ConfigServer {
    routes() {
       this.app.use('/static', express.static(staticFolderPath));
       this.app.use(this.apiBaseUrlV1, apiLimiter);
-      //this.app.use(this.apiBaseUrlV1, this.routers_v1());
+      this.app.use(this.apiBaseUrlV1, this.routers_v1());
       this.app.use(
          '/api/v1/documentation',
          swaggerUi_wallet.serveFiles(docJson, {}),
@@ -63,6 +63,7 @@ export class Server extends ConfigServer {
 
    start() {
       this.app.listen(this.port, () => {
+         console.log('The base URL is: ', this.apiBaseUrlV1);
          console.log('Environment: ', this.getEnvironment('NODE_ENV'));
          console.log('Server connected in port: ', this.port);
       });
