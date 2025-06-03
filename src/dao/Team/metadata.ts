@@ -18,5 +18,10 @@ export const TEAM: IMetadata<ITeamColumnsAliases, ITeamAssociations> = {
    },
    PLURAL: 'Teams',
    SINGULAR: 'Team',
-   ASSOCIATIONS: {},
+   ASSOCIATIONS: {
+      USER_SUSPENDED_BY: 'userSuspendedBy',
+      USER_CREATED_BY: 'userCreatedBy',
+      USER_UPDATED_BY: 'userUpdatedBy',
+      USER_DELETED_BY: 'userDeletedBy',
+   },
 };

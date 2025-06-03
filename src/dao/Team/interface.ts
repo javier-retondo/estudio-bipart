@@ -1,3 +1,5 @@
+import { IUser } from '../interfaces';
+
 export type ITeam = {
    id?: number;
    team_name: string;
@@ -10,6 +12,12 @@ export type ITeam = {
    suspended_at?: Date | null;
    suspended_by?: number | null;
    suspended_reason?: string | null;
+
+   // Associations
+   userSuspendedBy?: IUser;
+   userCreatedBy?: IUser;
+   userUpdatedBy?: IUser;
+   userDeletedBy?: IUser;
 };
 
 type TeamColumnAliasKeys =
@@ -26,4 +34,10 @@ type TeamColumnAliasKeys =
    | 'SUSPENDED_REASON';
 export type ITeamColumnsAliases = { [key in TeamColumnAliasKeys]: keyof ITeam };
 
-export type ITeamAssociations = object;
+type TeamAssociationKeys =
+   | 'USER_SUSPENDED_BY'
+   | 'USER_CREATED_BY'
+   | 'USER_UPDATED_BY'
+   | 'USER_DELETED_BY';
+
+export type ITeamAssociations = { [key in TeamAssociationKeys]: keyof ITeam };
