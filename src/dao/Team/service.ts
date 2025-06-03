@@ -29,6 +29,35 @@ class TeamService {
       });
       return teams.map((team) => team.dataValues);
    }
+
+   async updateTeam(
+      id: number,
+      teamData: Partial<Omit<ITeam, 'id' | 'created_at' | 'deleted_at'>>,
+   ): Promise<ITeam> {
+      const team = await Team.findByPk(id);
+      if (!team) {
+         throw new Error(`Team with id ${id} not found`);
+      }
+      const updatedTeam = await team.update({
+         ...teamData,
+         updated_at: new Date(),
+         updated_by: teamData.updated_by ?? team.dataValues.updated_by,
+      });
+      return updatedTeam.dataValues;
+   }
+
+   async deleteTeam(id: number): Promise<string> {
+      const team = await Team.findByPk(id);
+      if (!team) {
+         throw new Error(`Team with id ${id} not found`);
+      }
+      await team.update({
+         deleted_at: new Date(),
+         updated_at: new Date(),
+      });
+
+      return `Team with id ${id} deleted successfully`;
+   }
 }
 
 export const teamService = new TeamService();
