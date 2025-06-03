@@ -21,7 +21,8 @@
       "seed": "ts-node src/seeders/seedDefaultData.ts",
       "syncModels": "ts-node src/seeders/syncModels.ts",
       "encrypt": "ts-node src/utils/encryptor/encrypt.ts",
-      "decrypt": "ts-node src/utils/encryptor/decrypt.ts"
+      "decrypt": "ts-node src/utils/encryptor/decrypt.ts",
+      "envFile": "ts-node src/utils/encryptor/envFile.ts"
    },
    "author": "Javier Retondo",
    "license": "ISC",
