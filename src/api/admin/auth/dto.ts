@@ -1,12 +1,12 @@
-import { IsString } from 'class-validator';
+import { IsEmail, IsString } from 'class-validator';
 
 export enum AuthOrder {}
 
 export class AuthLoginDTO {
-   @IsString()
+   @IsString({ message: 'El nombre de usuario es obligatorio' })
    username: string;
 
-   @IsString()
+   @IsString({ message: 'La contraseña es obligatoria' })
    password: string;
 
    constructor(username: string, password: string) {
@@ -16,10 +16,18 @@ export class AuthLoginDTO {
 }
 
 export class changePasswordDTO {
-   @IsString()
+   @IsString({ message: 'La contraseña es obligatoria' })
    password: string;
 
    constructor(password: string) {
       this.password = password;
+   }
+}
+
+export class AuthResetPasswordDTO {
+   @IsEmail({}, { message: 'El email debe ser un email válido' })
+   email: string;
+   constructor(email: string) {
+      this.email = email;
    }
 }

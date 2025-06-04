@@ -6,7 +6,7 @@ import swaggerUi_wallet from 'swagger-ui-express';
 import { ConfigServer, sequelize } from './config';
 import { error } from './utils/network/responses';
 import docJson from '../documentation/api_v1.json';
-import { apiLimiter } from './config/rateLimit';
+//import { apiLimiter } from './config/rateLimit';
 import { Routes } from './api/routes';
 
 const staticFolderPath = path.join(__dirname, '..', 'public');
@@ -33,7 +33,7 @@ export class Server extends ConfigServer {
    }
    routes() {
       this.app.use('/static', express.static(staticFolderPath));
-      this.app.use(this.apiBaseUrlV1, apiLimiter);
+      // this.app.use(this.apiBaseUrlV1, apiLimiter);
       this.app.use(this.apiBaseUrlV1, this.routers_v1());
       this.app.use(
          '/api/v1/documentation',

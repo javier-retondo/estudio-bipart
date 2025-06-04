@@ -27,6 +27,7 @@
    "author": "Javier Retondo",
    "license": "ISC",
    "dependencies": {
+      "afip.ts.neko": "^1.0.1",
       "axios": "^1.7.9",
       "bcrypt": "^6.0.0",
       "class-transformer": "^0.5.1",

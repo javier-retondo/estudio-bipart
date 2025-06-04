@@ -28,7 +28,19 @@ export class AuthController {
          });
       }
       await authServices
-         .changePassword(userData.id, newPassword)
+         .changePassword(userData.id, newPassword, userData)
+         .then((body) => {
+            return success({ req, res, body });
+         })
+         .catch((err) => {
+            return error({ req, res, body: err.message });
+         });
+   }
+
+   async resetPassword(req: Request, res: Response) {
+      const userData: IUser = req.body.userData;
+      await authServices
+         .resetPassword(userData)
          .then((body) => {
             return success({ req, res, body });
          })

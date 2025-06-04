@@ -14,8 +14,12 @@ class AuthServices {
       return userService.login(username, password);
    }
 
-   async changePassword(userId: number, newPassword: string): Promise<IUser> {
-      return await userService.updateUser(userId, { password: newPassword });
+   async changePassword(userId: number, newPassword: string, userData: IUser): Promise<IUser> {
+      return await userService.updateUser(userId, { password: newPassword }, userData);
+   }
+
+   async resetPassword(userData: IUser): Promise<string> {
+      return await userService.resetPassword(userData.id as number, userData);
    }
 }
 

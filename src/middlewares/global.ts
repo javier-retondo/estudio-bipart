@@ -28,6 +28,7 @@ export class GlobalMW {
 
       try {
          const sessionDataRedis = await redisClient.get(`session:${String(token)}`);
+         console.log('sessionDataRedis :>> ', sessionDataRedis);
          if (sessionDataRedis) {
             const userData = JSON.parse(sessionDataRedis);
             const validToken = await redisClient.get(`user_tokens:${userData.id}`);
@@ -61,7 +62,7 @@ export class GlobalMW {
                   throw new Error('User is inactive or suspended');
                }
                req.body.userData = userData;
-               await redisClient.set(`session:${String(token)}`, JSON.stringify(userData), 60);
+               await redisClient.set(`session:${String(token)}`, JSON.stringify(userData), 60 * 60);
             } else {
                throw new Error('Token payload does not contain required user data');
             }

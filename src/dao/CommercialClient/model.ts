@@ -20,7 +20,7 @@ AllCommercialClient.init(
       city: { type: DataTypes.STRING(150), allowNull: true },
       address: { type: DataTypes.STRING(200), allowNull: true },
       observations: { type: DataTypes.STRING(255), allowNull: true },
-      created_at: { type: DataTypes.DATE, allowNull: false },
+      created_at: { type: DataTypes.DATE, allowNull: false, defaultValue: DataTypes.NOW },
       updated_at: { type: DataTypes.DATE, allowNull: true },
       deleted_at: { type: DataTypes.DATE, allowNull: true },
       created_by: { type: DataTypes.INTEGER, allowNull: false },

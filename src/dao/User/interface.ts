@@ -7,7 +7,7 @@ export type IUser = {
    username: string;
    email: string;
    phone?: string;
-   is_admin: boolean;
+   is_admin?: boolean;
    password?: string;
    is_pass_provisory: boolean;
    created_at?: Date;

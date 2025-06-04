@@ -1,6 +1,6 @@
 import { BaseRouter } from '../../../abstractions/baseRouter';
 import { AuthController } from './controller';
-import { AuthLoginDTO, changePasswordDTO } from './dto';
+import { AuthLoginDTO, AuthResetPasswordDTO, changePasswordDTO } from './dto';
 import { AuthMiddleware } from './middleware';
 
 const AUTH_ROUTES = {
@@ -17,10 +17,17 @@ export class AuthRouter extends BaseRouter<AuthController, AuthMiddleware, typeo
          .post(
             this.routesNames.SINGULAR,
             this.middleware.validationMiddleware(AuthLoginDTO, 'body'),
+            this.middleware.checkUsername,
             this.controller.login,
          )
          .patch(
-            `${this.routesNames.SINGULAR}/password`,
+            this.routesNames.SINGULAR + '/password/reset',
+            this.middleware.validationMiddleware(AuthResetPasswordDTO, 'body'),
+            this.middleware.checkEmail,
+            this.controller.resetPassword,
+         )
+         .patch(
+            this.routesNames.SINGULAR + '/password',
             this.middleware.verifyToken,
             this.middleware.validationMiddleware(changePasswordDTO, 'body'),
             this.controller.changePassword,
