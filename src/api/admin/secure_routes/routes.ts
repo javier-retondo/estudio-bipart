@@ -1,5 +1,6 @@
 import { BaseRouter } from '../../../abstractions/baseRouter';
 import { RouteController } from './controller';
+import { SecureRouteDTO } from './dto';
 import { RouteMiddleware } from './middleware';
 
 const ROUTE_ROUTES = {
@@ -13,8 +14,9 @@ export class RouteRouter extends BaseRouter<RouteController, RouteMiddleware, ty
 
    routes() {
       this.router.get(
-         this.routesNames.SINGULAR + '/:module',
+         this.routesNames.SINGULAR + '/:module_id',
          this.middleware.verifyToken,
+         this.middleware.validationMiddleware(SecureRouteDTO, 'params'),
          this.controller.getRoute,
       );
    }

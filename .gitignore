@@ -15,3 +15,4 @@ public/img/beneficios
 dist
 .eslintcache
 package-lock.json
+public

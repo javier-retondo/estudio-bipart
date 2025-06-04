@@ -15,7 +15,7 @@ AllUser.init(
       username: { type: DataTypes.STRING(50), allowNull: false },
       email: { type: DataTypes.STRING(100), allowNull: false },
       phone: { type: DataTypes.STRING(20), allowNull: true },
-      is_admin: { type: DataTypes.BOOLEAN, allowNull: false },
+      is_admin: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false },
       password: { type: DataTypes.STRING(255), allowNull: false },
       is_pass_provisory: { type: DataTypes.BOOLEAN, allowNull: false },
       created_at: { type: DataTypes.DATE, allowNull: false, defaultValue: DataTypes.NOW },

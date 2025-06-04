@@ -6,9 +6,9 @@ import { IUser } from '../../../dao/interfaces';
 export class RouteController {
    async getRoute(req: Request, res: Response): Promise<void> {
       const userData: IUser = req.body.userData;
-      const module = req.params.module;
+      const moduleId = Number(req.params.module_id);
       await routeServices
-         .checkUserModule(userData, module)
+         .checkUserModule(userData, moduleId)
          .then((body) => success({ req, res, body }))
          .catch((err) => error({ req, res, body: err }));
    }
