@@ -5,8 +5,8 @@ export type IPermission = {
    module_id: number;
    user_id: number;
    commercial_client_id: number;
-   date_from: Date;
-   date_to: Date;
+   date_from?: Date;
+   date_to?: Date;
    allow_read: boolean;
    allow_create: boolean;
    allow_update: boolean;

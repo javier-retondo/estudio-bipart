@@ -1,10 +1,9 @@
 import { NextFunction, Request, Response } from 'express';
 import fs from 'fs';
-import { DateTransformerClass } from '../../utils/transformers/dateTransformer';
-//import { ISessionData } from '../../utils/interfaces/general';
-//import { IErrorLog } from '../../dao/ErrorLog/interface';
-//import { errorLogsCreator } from '../../dao/ErrorLog/crud/create';
-//import { getLocationFromIP } from '../functions/getAddressIP';
+import { ILog, IUser } from '../../dao/interfaces';
+import { LOG_TYPES } from '../../dao/Log/interface';
+import { Log } from '../../dao/models';
+
 class Responses {
    success = (props: {
       req: Request;
@@ -14,18 +13,6 @@ class Responses {
       difHora?: number;
       pagination?: { page: number; limit: number; total: number };
    }) => {
-      try {
-         props.body =
-            typeof props.body === 'object' && props.difHora
-               ? new DateTransformerClass(
-                    props.body,
-                    props.difHora,
-                    'DD/MM/YYYY HH:mm:ss',
-                 ).transform()
-               : props.body;
-      } catch (error) {
-         console.error(error);
-      }
       const { pagination } = props;
       if (pagination) {
          const { page, limit, total } = pagination;
@@ -74,32 +61,22 @@ class Responses {
       const statusCode = props.status || 500;
 
       if (statusCode === 500) {
-         //const address = ip ? await getLocationFromIP(ip.toString()) : null;
-         //const userData: ISessionData = props.req.body.userData;
-         // const { Usu_Id, Emp_Id } = userData || { Usu_Id: undefined, Emp_Id: undefined };
-         /*
-         const errorLog: IErrorLog = {
-            Err_Date: new Date(),
-            Err_Route: props.req.originalUrl,
-            Err_Method: props.req.method,
-            Err_Ip: ip?.toString(),
-            Usu_Id: Usu_Id,
-            Emp_Id: Emp_Id,
-            Err_Query: JSON.stringify(props.req.query),
-            Err_Params: JSON.stringify(props.req.params),
-            Err_ErrorMessage: props.body?.message || 'Error desconocido',
-            Err_Stack: props.body?.stack || null,
-            Err_Sql: props.body?.sql || null,
-            Err_Country: address?.country,
-            Err_Region: address?.region,
-            Err_City: address?.city,
-            Err_Lat: address?.lat,
-            Err_Lon: address?.lon,
-         };
-        */
+         const userData: IUser = props.req.body.userData;
+         const { id: userId } = userData || { id: undefined };
 
+         const errorLog: ILog = {
+            user_id: userId,
+            endpoint: props.req.originalUrl,
+            method: props.req.method,
+            description: props.body?.message || '',
+            date_time: new Date(),
+            type: LOG_TYPES.ERROR,
+            stack_trace: props.body?.stack || '',
+            sql: props.body?.sql || '',
+         };
+         console.log('errorLog :>> ', errorLog);
          try {
-            // await errorLogsCreator.createEntities([errorLog]);
+            await Log.create(errorLog);
          } catch (dbError: any) {
             console.error('❌ Error guardando log en BD:', dbError.message);
          }

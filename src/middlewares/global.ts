@@ -28,7 +28,6 @@ export class GlobalMW {
 
       try {
          const sessionDataRedis = await redisClient.get(`session:${String(token)}`);
-         console.log('sessionDataRedis :>> ', sessionDataRedis);
          if (sessionDataRedis) {
             const userData = JSON.parse(sessionDataRedis);
             const validToken = await redisClient.get(`user_tokens:${userData.id}`);

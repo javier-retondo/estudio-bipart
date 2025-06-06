@@ -9,8 +9,14 @@ export const LOG: IMetadata<ILogColumnsAliases, ILogAssociations> = {
       USER_ID: 'user_id',
       TYPE: 'type',
       DESCRIPTION: 'description',
+      ENDPOINT: 'endpoint',
+      METHOD: 'method',
+      STACK_TRACE: 'stack_trace',
+      SQL: 'sql',
    },
    PLURAL: 'Logs',
    SINGULAR: 'Log',
-   ASSOCIATIONS: {},
+   ASSOCIATIONS: {
+      USER: 'User',
+   },
 };

@@ -26,7 +26,7 @@ export enum CommercialClientOrder {
 
 export enum statusCommercialClient {
    ACTIVE = 'active',
-   INACTIVE = 'inactive',
+   SUSPENDED = 'suspended',
 }
 
 export class CreateCommercialClientDTO {
@@ -182,8 +182,7 @@ export class CommercialClientsFilterDTO {
 
    @IsBoolean()
    @IsOptional()
-   @Transform(({ value }) => String(value) === 'true')
-   @Type(() => Boolean)
+   @Transform(({ value }) => value === 'true' || value === true)
    public sortDesc?: boolean;
 
    @IsString()
@@ -192,6 +191,7 @@ export class CommercialClientsFilterDTO {
 
    @IsEnum(statusCommercialClient)
    @IsOptional()
+   @Transform(({ value }) => (value === '' ? undefined : value))
    public status?: statusCommercialClient;
 
    constructor(

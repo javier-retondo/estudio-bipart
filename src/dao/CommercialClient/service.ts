@@ -51,7 +51,7 @@ class CommercialClientService {
       order: keyof ICommercialClient = 'id',
       orderDesc: 'ASC' | 'DESC' = 'ASC',
       search?: string,
-      status?: 'active' | 'inactive',
+      status?: 'active' | 'suspended',
    ): Promise<{
       rows: Partial<ICommercialClient>[];
       count: number;
@@ -60,12 +60,12 @@ class CommercialClientService {
       if (search) {
          where.push({
             [Op.or]: [
-               { fiscal_name: { [Op.iLike]: `%${search}%` } },
-               { fiscal_number: { [Op.iLike]: `%${search}%` } },
-               { email: { [Op.iLike]: `%${search}%` } },
-               { phone: { [Op.iLike]: `%${search}%` } },
-               { address: { [Op.iLike]: `%${search}%` } },
-               { city: { [Op.iLike]: `%${search}%` } },
+               { fiscal_name: { [Op.like]: `%${search}%` } },
+               { fiscal_number: { [Op.like]: `%${search}%` } },
+               { email: { [Op.like]: `%${search}%` } },
+               { phone: { [Op.like]: `%${search}%` } },
+               { address: { [Op.like]: `%${search}%` } },
+               { city: { [Op.like]: `%${search}%` } },
             ],
          });
       }
@@ -73,7 +73,7 @@ class CommercialClientService {
          if (status === 'active') {
             where.push({ suspended_at: null });
          }
-         if (status === 'inactive') {
+         if (status === 'suspended') {
             where.push({ suspended_at: { [Op.ne]: null } });
          }
       }

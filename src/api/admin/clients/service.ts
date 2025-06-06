@@ -88,12 +88,13 @@ class CommercialClientServices {
 
    async getCommercialClients(CommercialClientsFilterDTO: CommercialClientsFilterDTO) {
       const { page, pageSize, sortBy, sortDesc, search, status } = CommercialClientsFilterDTO;
-      console.log('sortDesc :>> ', sortDesc);
+      console.log('status :>> ', status);
       return commercialClientService.getCommercialClients(
          [
             COMMERCIAL_CLIENT.COLUMNS.ID,
             COMMERCIAL_CLIENT.COLUMNS.FISCAL_NAME,
             COMMERCIAL_CLIENT.COLUMNS.FISCAL_NUMBER,
+            COMMERCIAL_CLIENT.COLUMNS.SUSPENDED_AT,
          ],
          [],
          page,
