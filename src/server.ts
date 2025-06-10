@@ -76,10 +76,7 @@ export class Server extends ConfigServer {
             key: readFileSync(path.join(key), 'utf8'),
             cert: readFileSync(path.join(cert), 'utf8'),
          };
-         console.log(
-            'Ruta cert',
-            path.join('/etc/letsencrypt/live/nekoadmin.com.ar-0002/privkey.pem'),
-         );
+         console.log('Ruta cert', path.join(cert));
          https.createServer(options, this.app).listen(this.app.get('port'), () => {
             console.log('The base URL is: ', this.apiBaseUrlV1);
             console.log('Environment: ', this.getEnvironment('NODE_ENV'));
