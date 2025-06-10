@@ -70,10 +70,8 @@ export type IOperativeClientColumnsAliases = {
 
 type OperativeClientAssociationKeys =
    | 'COMMERCIAL_CLIENT'
-   | 'DOMESTIC_SERVICE'
    | 'SOCIAL_SECURITY'
    | 'RISK_PRODUCT'
-   | 'BALANCE'
    | 'PYME_PRODUCT';
 
 export type IOperativeClientAssociations = {

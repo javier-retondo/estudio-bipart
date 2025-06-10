@@ -16,7 +16,7 @@ export type ICommercialClient = {
    created_at?: Date;
    updated_at?: Date | null;
    deleted_at?: Date | null;
-   created_by: number;
+   created_by?: number;
    updated_by?: number | null;
    deleted_by?: number | null;
    suspended_at?: Date | null;
@@ -26,6 +26,9 @@ export type ICommercialClient = {
    // Associations
    OperativeClients?: IOperativeClient[];
    VatCondition?: IVatCondition;
+
+   // Virtual fields
+   province_id?: number;
 };
 
 type CommercialClientColumnAliasKeys =

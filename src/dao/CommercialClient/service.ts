@@ -51,7 +51,7 @@ class CommercialClientService {
       order: keyof ICommercialClient = 'id',
       orderDesc: 'ASC' | 'DESC' = 'ASC',
       search?: string,
-      status?: 'active' | 'inactive',
+      status?: 'active' | 'suspended',
    ): Promise<{
       rows: Partial<ICommercialClient>[];
       count: number;
@@ -60,12 +60,12 @@ class CommercialClientService {
       if (search) {
          where.push({
             [Op.or]: [
-               { fiscal_name: { [Op.iLike]: `%${search}%` } },
-               { fiscal_number: { [Op.iLike]: `%${search}%` } },
-               { email: { [Op.iLike]: `%${search}%` } },
-               { phone: { [Op.iLike]: `%${search}%` } },
-               { address: { [Op.iLike]: `%${search}%` } },
-               { city: { [Op.iLike]: `%${search}%` } },
+               { fiscal_name: { [Op.like]: `%${search}%` } },
+               { fiscal_number: { [Op.like]: `%${search}%` } },
+               { email: { [Op.like]: `%${search}%` } },
+               { phone: { [Op.like]: `%${search}%` } },
+               { address: { [Op.like]: `%${search}%` } },
+               { city: { [Op.like]: `%${search}%` } },
             ],
          });
       }
@@ -73,7 +73,7 @@ class CommercialClientService {
          if (status === 'active') {
             where.push({ suspended_at: null });
          }
-         if (status === 'inactive') {
+         if (status === 'suspended') {
             where.push({ suspended_at: { [Op.ne]: null } });
          }
       }
@@ -190,6 +190,38 @@ class CommercialClientService {
          deleted_by,
       });
       return `El cliente comercial con ID ${id} ha sido eliminado exitosamente.`;
+   }
+
+   async suspendCommercialClient(
+      id: number,
+      suspended_by: number,
+      suspended_reason?: string,
+   ): Promise<ICommercialClient> {
+      const client = await this.getClientModelById(id);
+      if (!client) {
+         throw new Error(`Commercial client with ID ${id} not found`);
+      }
+      await client.update({
+         suspended_at: new Date(),
+         suspended_by,
+         suspended_reason,
+      });
+      return client.dataValues;
+   }
+
+   async unsuspendCommercialClient(id: number, unsuspended_by: number): Promise<ICommercialClient> {
+      const client = await this.getClientModelById(id);
+      if (!client) {
+         throw new Error(`Commercial client with ID ${id} not found`);
+      }
+      await client.update({
+         suspended_at: null,
+         suspended_by: null,
+         suspended_reason: null,
+         updated_by: unsuspended_by,
+         updated_at: new Date(),
+      });
+      return client.dataValues;
    }
 }
 const commercialClientService = new CommercialClientService();

@@ -8,7 +8,6 @@ export const DOMESTIC_SERVICE: IMetadata<
    TABLE: 'domestic_service',
    COLUMNS: {
       ID: 'id',
-      OPERATIVE_CLIENT_ID: 'operative_client_id',
       COUNT: 'count',
       USER_ID: 'user_id',
    },

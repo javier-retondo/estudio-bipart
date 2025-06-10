@@ -9,7 +9,7 @@ import { IUser } from './interface';
 import jwt from 'jsonwebtoken';
 import { redisClient } from '../../config/redisManager';
 import { moduleService } from '../Module/service';
-import { FindOptions, WhereOptions } from 'sequelize';
+import { FindOptions, Transaction, WhereOptions } from 'sequelize';
 import { Op } from 'sequelize';
 
 class UserService {
@@ -153,21 +153,25 @@ class UserService {
       phone?: string,
       is_admin?: boolean,
       userData?: IUser,
+      transaction?: Transaction,
    ): Promise<IUser> {
       const name = `${firstname} ${lastname}`;
       const password = Math.random().toString(36).slice(-8);
       const encryptedPassword = await bcrypt.hash(password, 10);
-      const user = await User.create({
-         firstname,
-         lastname,
-         username,
-         email,
-         phone,
-         is_admin,
-         password: encryptedPassword,
-         is_pass_provisory: true,
-         created_by: userData?.id || null,
-      });
+      const user = await User.create(
+         {
+            firstname,
+            lastname,
+            username,
+            email,
+            phone,
+            is_admin,
+            password: encryptedPassword,
+            is_pass_provisory: true,
+            created_by: userData?.id || null,
+         },
+         { transaction },
+      );
 
       const html = await ejs.renderFile(join('templates', 'welcome.ejs'), {
          nombre: name,
@@ -181,20 +185,30 @@ class UserService {
       return user.dataValues;
    }
 
-   async updateUser(id: number, data: Partial<IUser>, userData: IUser): Promise<IUser> {
+   async updateUser(
+      id: number,
+      data: Partial<IUser>,
+      userData: IUser,
+      transaction?: Transaction,
+   ): Promise<IUser> {
       const user = await this.getUserModelById(id);
       if (!user) {
          throw new Error(`User with id ${id} not found`);
       }
 
-      await user.update({
-         ...data,
-         password: data.password ? await bcrypt.hash(data.password, 10) : user.dataValues.password,
-         is_pass_provisory:
-            data.password && !data.is_pass_provisory ? false : data.is_pass_provisory,
-         updated_by: userData.id as number,
-         updated_at: new Date(),
-      });
+      await user.update(
+         {
+            ...data,
+            password: data.password
+               ? await bcrypt.hash(data.password, 10)
+               : user.dataValues.password,
+            is_pass_provisory:
+               data.password && !data.is_pass_provisory ? false : data.is_pass_provisory,
+            updated_by: userData.id as number,
+            updated_at: new Date(),
+         },
+         { transaction },
+      );
 
       delete user.dataValues.password;
       await this.invalidateUserData(id);

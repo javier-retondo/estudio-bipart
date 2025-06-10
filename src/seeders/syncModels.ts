@@ -18,6 +18,7 @@ import {
    Team,
    User,
    VatCondition,
+   PaymentType,
 } from '../dao/models';
 
 const modelsMap = {
@@ -39,6 +40,7 @@ const modelsMap = {
    Team,
    User,
    VatCondition,
+   PaymentType,
 };
 
 const initAllModels = async (

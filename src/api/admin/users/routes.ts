@@ -21,6 +21,11 @@ export class UserRouter extends BaseRouter<UserController, UserMiddleware, typeo
             this.controller.getCommercialClients,
          )
          .get(
+            this.routesNames.SINGULAR + '/my-data',
+            this.middleware.verifyToken,
+            this.controller.getMyData,
+         )
+         .get(
             this.routesNames.SINGULAR + '/modules',
             this.middleware.verifyToken,
             this.controller.getModules,

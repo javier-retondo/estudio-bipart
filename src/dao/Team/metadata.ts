@@ -6,6 +6,7 @@ export const TEAM: IMetadata<ITeamColumnsAliases, ITeamAssociations> = {
    COLUMNS: {
       ID: 'id',
       TEAM_NAME: 'team_name',
+      DESCRIPTION: 'description',
       CREATED_AT: 'created_at',
       UPDATED_AT: 'updated_at',
       DELETED_AT: 'deleted_at',

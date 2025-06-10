@@ -1,4 +1,4 @@
-import { Balance } from './Balance/model';
+import { Balance } from './BalanceProduct/model';
 import { CommercialClient } from './CommercialClient/model';
 import { DigitalCert } from './DigitalCert/model';
 import { Division } from './Division/model';
@@ -8,6 +8,7 @@ import { Log } from './Log/model';
 import { Module } from './Module/model';
 import { Monotributist } from './Monotributist/model';
 import { OperativeClient } from './OperativeClient/model';
+import { PaymentType } from './PaymentType/model';
 import { Permission } from './Permission/model';
 import { PymeProduct } from './PymeProduct/model';
 import { PymeProdUsage } from './PymeProductUsage/model';
@@ -36,4 +37,5 @@ export {
    Team,
    User,
    VatCondition,
+   PaymentType,
 };

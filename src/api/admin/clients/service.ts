@@ -1,7 +1,8 @@
 import { sequelize } from '../../../config';
 import { commercialClientService } from '../../../dao/CommercialClient/service';
-import { IUser } from '../../../dao/interfaces';
+import { ICommercialClient, IUser } from '../../../dao/interfaces';
 import { COMMERCIAL_CLIENT } from '../../../dao/metadata';
+import { getCuitData } from '../../../utils/arca';
 import {
    CommercialClientsFilterDTO,
    CreateCommercialClientDTO,
@@ -88,12 +89,12 @@ class CommercialClientServices {
 
    async getCommercialClients(CommercialClientsFilterDTO: CommercialClientsFilterDTO) {
       const { page, pageSize, sortBy, sortDesc, search, status } = CommercialClientsFilterDTO;
-      console.log('sortDesc :>> ', sortDesc);
       return commercialClientService.getCommercialClients(
          [
             COMMERCIAL_CLIENT.COLUMNS.ID,
             COMMERCIAL_CLIENT.COLUMNS.FISCAL_NAME,
             COMMERCIAL_CLIENT.COLUMNS.FISCAL_NUMBER,
+            COMMERCIAL_CLIENT.COLUMNS.SUSPENDED_AT,
          ],
          [],
          page,
@@ -116,6 +117,31 @@ class CommercialClientServices {
    async softDeleteCommercialClient(id: number, userData: IUser) {
       const { id: userId } = userData;
       return commercialClientService.deleteCommercialClient(id, userId as number);
+   }
+
+   async suspendUnsuspendCommercialClient(
+      id: number,
+      userData: IUser,
+      reason?: string,
+   ): Promise<ICommercialClient> {
+      const { id: userId } = userData;
+      const client = await commercialClientService.getCommercialClientById(id, [
+         COMMERCIAL_CLIENT.COLUMNS.SUSPENDED_AT,
+         COMMERCIAL_CLIENT.COLUMNS.SUSPENDED_BY,
+      ]);
+      if (!client) {
+         throw new Error(`Commercial client with ID ${id} not found`);
+      }
+      const suspended = client.suspended_at ? true : false;
+      if (suspended) {
+         return await commercialClientService.unsuspendCommercialClient(id, userId as number);
+      }
+      return await commercialClientService.suspendCommercialClient(id, userId as number, reason);
+   }
+
+   async getDataFiscalClient(fiscal_number: number) {
+      const data = await getCuitData(fiscal_number);
+      return data;
    }
 
    async getOperativeClients(id: number) {

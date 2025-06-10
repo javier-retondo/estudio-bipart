@@ -28,11 +28,11 @@ Permission.init(
       },
       date_from: {
          type: DataTypes.DATEONLY,
-         allowNull: false,
+         allowNull: true,
       },
       date_to: {
          type: DataTypes.DATEONLY,
-         allowNull: false,
+         allowNull: true,
       },
       allow_read: {
          type: DataTypes.BOOLEAN,

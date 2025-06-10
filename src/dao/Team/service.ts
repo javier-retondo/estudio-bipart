@@ -1,3 +1,4 @@
+import { IUser } from '../interfaces';
 import { ITeam } from './interface';
 import { Team } from './model';
 
@@ -46,7 +47,7 @@ class TeamService {
       return updatedTeam.dataValues;
    }
 
-   async deleteTeam(id: number): Promise<string> {
+   async deleteTeam(id: number, userData: IUser): Promise<string> {
       const team = await Team.findByPk(id);
       if (!team) {
          throw new Error(`Team with id ${id} not found`);
@@ -54,6 +55,8 @@ class TeamService {
       await team.update({
          deleted_at: new Date(),
          updated_at: new Date(),
+         deleted_by: userData.id,
+         updated_by: userData.id,
       });
 
       return `Team with id ${id} deleted successfully`;

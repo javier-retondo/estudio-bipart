@@ -1,6 +1,7 @@
 export type IMonotributist = {
    id?: number;
    name: string;
+   description?: string | null;
    created_at?: Date;
    updated_at?: Date | null;
    deleted_at?: Date | null;
@@ -15,6 +16,7 @@ export type IMonotributist = {
 type MonotributistColumnAliasKeys =
    | 'ID'
    | 'NAME'
+   | 'DESCRIPTION'
    | 'CREATED_AT'
    | 'UPDATED_AT'
    | 'DELETED_AT'
