@@ -67,11 +67,15 @@ export class Server extends ConfigServer {
       if (env === 'production') {
          const key = this.getEnvironment('KEY_PATH');
          const cert = this.getEnvironment('CERT_PATH');
+         // see the content of cert and key
+
          if (!key || !cert) {
             console.error('SSL key or certificate path is not set in environment variables.');
             return;
          }
          console.log('Starting server in production mode with SSL...');
+         console.log('SSL key path:', readFileSync(path.join(key), 'utf8'));
+         console.log('SSL cert path:', readFileSync(path.join(cert), 'utf8'));
          const options = {
             key: readFileSync(path.join(key), 'utf8'),
             cert: readFileSync(path.join(cert), 'utf8'),
