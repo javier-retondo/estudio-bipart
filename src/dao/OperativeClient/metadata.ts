@@ -34,10 +34,8 @@ export const OPERATIVE_CLIENT: IMetadata<
    SINGULAR: 'OperativeClient',
    ASSOCIATIONS: {
       COMMERCIAL_CLIENT: 'CommercialClient',
-      DOMESTIC_SERVICE: 'DomesticService',
       SOCIAL_SECURITY: 'SocialSecurity',
       RISK_PRODUCT: 'RiskProduct',
-      BALANCE: 'Balance',
       PYME_PRODUCT: 'PymeProduct',
    },
 };

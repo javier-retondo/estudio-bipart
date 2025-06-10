@@ -87,6 +87,14 @@ export class UserController {
          .catch((err) => error({ req, res, body: err }));
    }
 
+   async getMyData(req: Request, res: Response): Promise<void> {
+      const userData = req.body.userData;
+      await userServices
+         .getUser(userData.id)
+         .then((body) => success({ req, res, body }))
+         .catch((err) => error({ req, res, body: err }));
+   }
+
    async deleteUser(req: Request, res: Response): Promise<void> {
       const userId = Number(req.params.Id);
       const userData = req.body.userData;

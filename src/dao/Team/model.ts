@@ -11,6 +11,7 @@ AllTeam.init(
    {
       id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
       team_name: { type: DataTypes.STRING(50), allowNull: false },
+      description: { type: DataTypes.STRING(255), allowNull: true, defaultValue: null },
       created_at: { type: DataTypes.DATE, allowNull: false },
       updated_at: { type: DataTypes.DATE, allowNull: true, defaultValue: null },
       deleted_at: { type: DataTypes.DATE, allowNull: true, defaultValue: null },

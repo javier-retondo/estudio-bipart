@@ -1,4 +1,4 @@
-export type IMonotributist = {
+export type IPaymentType = {
    id?: number;
    name: string;
    description?: string | null;
@@ -13,7 +13,7 @@ export type IMonotributist = {
    suspended_reason?: string | null;
 };
 
-type MonotributistColumnAliasKeys =
+type PaymentTypeColumnAliasKeys =
    | 'ID'
    | 'NAME'
    | 'DESCRIPTION'
@@ -26,8 +26,8 @@ type MonotributistColumnAliasKeys =
    | 'SUSPENDED_AT'
    | 'SUSPENDED_BY'
    | 'SUSPENDED_REASON';
-export type IMonotributistColumnsAliases = {
-   [key in MonotributistColumnAliasKeys]: keyof IMonotributist;
+export type IPaymentTypeColumnsAliases = {
+   [key in PaymentTypeColumnAliasKeys]: keyof IPaymentType;
 };
 
-export type IMonotributistAssociations = object;
+export type IPaymentTypeAssociations = object;

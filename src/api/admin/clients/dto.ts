@@ -44,10 +44,12 @@ export class CreateCommercialClientDTO {
 
    @IsInt()
    @IsPositive()
+   @Type(() => Number)
    public vat_condition_id: number;
 
    @IsEmail()
    @IsOptional()
+   @Transform(({ value }) => (value === '' ? undefined : value))
    public email?: string;
 
    @IsString()
@@ -112,6 +114,7 @@ export class UpdateCommercialClientDTO {
 
    @IsInt()
    @IsPositive()
+   @Type(() => Number)
    public vat_condition_id?: number;
 
    @IsEmail()
@@ -219,5 +222,105 @@ export class CommercialClientIdDTO {
 
    constructor(Id: number) {
       this.Id = Id;
+   }
+}
+
+export class SuspendCommercialClientDTO {
+   @IsString()
+   @IsOptional()
+   public reason?: string;
+
+   constructor(reason?: string) {
+      this.reason = reason;
+   }
+}
+
+export class CreateTeamDTO {
+   @IsString()
+   @Length(1, 100)
+   public team_name: string;
+
+   @IsString()
+   @IsOptional()
+   public description?: string;
+
+   constructor(team_name: string, description?: string) {
+      this.team_name = team_name;
+      this.description = description;
+   }
+}
+
+export class CreatePaymentTypeDTO {
+   @IsString()
+   @Length(1, 100)
+   public name: string;
+
+   @IsString()
+   @IsOptional()
+   public description?: string;
+
+   constructor(name: string, description?: string) {
+      this.name = name;
+      this.description = description;
+   }
+}
+
+export class CreatePymeProductDTO {
+   @IsString()
+   @Length(1, 100)
+   public pyme_prod_name: string;
+
+   @IsString()
+   @IsOptional()
+   public description?: string;
+
+   constructor(pyme_prod_name: string, description?: string) {
+      this.pyme_prod_name = pyme_prod_name;
+      this.description = description;
+   }
+}
+
+export class CreateDivisionDTO {
+   @IsString()
+   @Length(1, 100)
+   public division_name: string;
+
+   @IsString()
+   @IsOptional()
+   public description?: string;
+
+   constructor(division_name: string, description?: string) {
+      this.division_name = division_name;
+      this.description = description;
+   }
+}
+
+export class CreateGrossIncomeDTO {
+   @IsString()
+   @Length(1, 100)
+   public name: string;
+
+   @IsString()
+   @IsOptional()
+   public description?: string;
+
+   constructor(name: string, description?: string) {
+      this.name = name;
+      this.description = description;
+   }
+}
+
+export class CreateMonotributistaDTO {
+   @IsString()
+   @Length(1, 100)
+   public name: string;
+
+   @IsString()
+   @IsOptional()
+   public description?: string;
+
+   constructor(name: string, description?: string) {
+      this.name = name;
+      this.description = description;
    }
 }

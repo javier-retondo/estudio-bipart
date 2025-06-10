@@ -5,7 +5,6 @@ export const BALANCE: IMetadata<IBalanceColumnsAliases, IBalanceAssociations> = 
    TABLE: 'balance',
    COLUMNS: {
       ID: 'id',
-      OPERATIVE_CLIENT_ID: 'operative_client_id',
       TEAM_ID: 'team_id',
       MONTH_NUMBER: 'month_number',
    },

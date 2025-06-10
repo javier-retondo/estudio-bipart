@@ -6,6 +6,7 @@ export const DIVISION: IMetadata<IDivisionColumnsAliases, IDivisionAssociations>
    COLUMNS: {
       ID: 'id',
       DIVISION_NAME: 'division_name',
+      DESCRIPTION: 'description',
       CREATED_AT: 'created_at',
       UPDATED_AT: 'updated_at',
       DELETED_AT: 'deleted_at',

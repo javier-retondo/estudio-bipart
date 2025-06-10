@@ -1,4 +1,4 @@
-import { BALANCE } from './Balance/metadata';
+import { BALANCE } from './BalanceProduct/metadata';
 import { COMMERCIAL_CLIENT } from './CommercialClient/metadata';
 import { DIGITAL_CERT } from './DigitalCert/metadata';
 import { DIVISION } from './Division/metadata';

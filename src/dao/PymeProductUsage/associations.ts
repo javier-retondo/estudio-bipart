@@ -1,5 +1,23 @@
-import { DIVISION, GROSS_INCOME, MONOTRIBUTIST, PYME_PRODUCT, TEAM, USER } from '../metadata';
-import { Division, GrossIncome, Monotributist, PymeProduct, Team, User } from '../models';
+import {
+   BALANCE,
+   DIVISION,
+   DOMESTIC_SERVICE,
+   GROSS_INCOME,
+   MONOTRIBUTIST,
+   PYME_PRODUCT,
+   TEAM,
+   USER,
+} from '../metadata';
+import {
+   Balance,
+   Division,
+   DomesticService,
+   GrossIncome,
+   Monotributist,
+   PymeProduct,
+   Team,
+   User,
+} from '../models';
 import { PYME_PROD_USAGE } from './metadata';
 import { PymeProdUsage } from './model';
 
@@ -39,5 +57,17 @@ export const initPymeProductUsageAssociations = () => {
       foreignKey: PYME_PROD_USAGE.COLUMNS.USER_ID,
       targetKey: USER.COLUMNS.ID,
       as: PYME_PROD_USAGE.ASSOCIATIONS.USER,
+   });
+
+   PymeProdUsage.belongsTo(Balance, {
+      foreignKey: PYME_PROD_USAGE.COLUMNS.BALANCE_PRODUCT_ID,
+      targetKey: BALANCE.COLUMNS.ID,
+      as: PYME_PROD_USAGE.ASSOCIATIONS.BALANCE_PRODUCT,
+   });
+
+   PymeProdUsage.belongsTo(DomesticService, {
+      foreignKey: PYME_PROD_USAGE.COLUMNS.DOMESTIC_SERVICE_ID,
+      targetKey: DOMESTIC_SERVICE.COLUMNS.ID,
+      as: PYME_PROD_USAGE.ASSOCIATIONS.DOMESTIC_SERVICE,
    });
 };

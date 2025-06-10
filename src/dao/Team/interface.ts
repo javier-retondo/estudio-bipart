@@ -3,6 +3,7 @@ import { IUser } from '../interfaces';
 export type ITeam = {
    id?: number;
    team_name: string;
+   description?: string | null;
    created_at?: Date;
    updated_at?: Date | null;
    deleted_at?: Date | null;
@@ -23,6 +24,7 @@ export type ITeam = {
 type TeamColumnAliasKeys =
    | 'ID'
    | 'TEAM_NAME'
+   | 'DESCRIPTION'
    | 'CREATED_AT'
    | 'UPDATED_AT'
    | 'DELETED_AT'

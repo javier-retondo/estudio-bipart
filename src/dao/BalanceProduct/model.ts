@@ -14,10 +14,6 @@ Balance.init(
          primaryKey: true,
          autoIncrement: true,
       },
-      operative_client_id: {
-         type: DataTypes.INTEGER,
-         allowNull: false,
-      },
       team_id: {
          type: DataTypes.INTEGER,
          allowNull: false,

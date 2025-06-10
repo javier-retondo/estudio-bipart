@@ -1,6 +1,7 @@
 export type IPymeProduct = {
    id?: number;
    pyme_prod_name: string;
+   description?: string | null;
    created_at?: Date;
    updated_at?: Date | null;
    deleted_at?: Date | null;
@@ -15,6 +16,7 @@ export type IPymeProduct = {
 type PymeProductColumnAliasKeys =
    | 'ID'
    | 'NAME'
+   | 'DESCRIPTION'
    | 'CREATED_AT'
    | 'UPDATED_AT'
    | 'DELETED_AT'

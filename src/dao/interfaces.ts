@@ -1,4 +1,4 @@
-import { IBalance } from './Balance/interface';
+import { IBalance } from './BalanceProduct/interface';
 import { ICommercialClient } from './CommercialClient/interface';
 import { IDigitalCert } from './DigitalCert/interface';
 import { IDivision } from './Division/interface';

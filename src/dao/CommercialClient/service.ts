@@ -191,6 +191,38 @@ class CommercialClientService {
       });
       return `El cliente comercial con ID ${id} ha sido eliminado exitosamente.`;
    }
+
+   async suspendCommercialClient(
+      id: number,
+      suspended_by: number,
+      suspended_reason?: string,
+   ): Promise<ICommercialClient> {
+      const client = await this.getClientModelById(id);
+      if (!client) {
+         throw new Error(`Commercial client with ID ${id} not found`);
+      }
+      await client.update({
+         suspended_at: new Date(),
+         suspended_by,
+         suspended_reason,
+      });
+      return client.dataValues;
+   }
+
+   async unsuspendCommercialClient(id: number, unsuspended_by: number): Promise<ICommercialClient> {
+      const client = await this.getClientModelById(id);
+      if (!client) {
+         throw new Error(`Commercial client with ID ${id} not found`);
+      }
+      await client.update({
+         suspended_at: null,
+         suspended_by: null,
+         suspended_reason: null,
+         updated_by: unsuspended_by,
+         updated_at: new Date(),
+      });
+      return client.dataValues;
+   }
 }
 const commercialClientService = new CommercialClientService();
 export { commercialClientService };

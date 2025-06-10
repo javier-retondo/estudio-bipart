@@ -6,6 +6,7 @@ export const GROSS_INCOME: IMetadata<IGrossIncomeColumnsAliases, IGrossIncomeAss
    COLUMNS: {
       ID: 'id',
       NAME: 'name',
+      DESCRIPTION: 'description',
       CREATED_AT: 'created_at',
       UPDATED_AT: 'updated_at',
       DELETED_AT: 'deleted_at',

@@ -1,4 +1,4 @@
-import { initBalanceAssociations } from './Balance/associations';
+import { initBalanceAssociations } from './BalanceProduct/associations';
 import { initCommercialClientAssociations } from './CommercialClient/associations';
 import { initDigitalCertAssociations } from './DigitalCert/associations';
 import { initDivisionAssociations } from './Division/associations';

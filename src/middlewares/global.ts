@@ -188,7 +188,7 @@ export class GlobalMW {
             req.params = dto;
          }
          if (errors.length > 0) {
-            error({ req, res, body: errors, status: 400 });
+            error({ req, res, body: JSON.stringify(errors[0].error), status: 400 });
          } else {
             next();
          }

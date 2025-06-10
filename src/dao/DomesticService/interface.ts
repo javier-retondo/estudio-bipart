@@ -2,7 +2,6 @@ import { IUser } from '../interfaces';
 
 export type IDomesticService = {
    id?: number;
-   operative_client_id: number;
    count: number;
    user_id: number;
 
@@ -10,7 +9,7 @@ export type IDomesticService = {
    User?: IUser;
 };
 
-type DomesticServiceColumnAliasKeys = 'ID' | 'OPERATIVE_CLIENT_ID' | 'COUNT' | 'USER_ID';
+type DomesticServiceColumnAliasKeys = 'ID' | 'COUNT' | 'USER_ID';
 export type IDomesticServiceColumnsAliases = {
    [key in DomesticServiceColumnAliasKeys]: keyof IDomesticService;
 };

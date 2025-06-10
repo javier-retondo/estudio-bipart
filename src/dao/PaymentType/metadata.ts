@@ -1,11 +1,11 @@
 import { IMetadata } from '../../utils/interfaces/general';
-import { IPymeProductAssociations, IPymeProductColumnsAliases } from './interface';
+import { IPaymentTypeAssociations, IPaymentTypeColumnsAliases } from './interface';
 
-export const PYME_PRODUCT: IMetadata<IPymeProductColumnsAliases, IPymeProductAssociations> = {
-   TABLE: 'pyme_product',
+export const PAYMENT_TYPE: IMetadata<IPaymentTypeColumnsAliases, IPaymentTypeAssociations> = {
+   TABLE: 'payment_type',
    COLUMNS: {
       ID: 'id',
-      NAME: 'pyme_prod_name',
+      NAME: 'name',
       DESCRIPTION: 'description',
       CREATED_AT: 'created_at',
       UPDATED_AT: 'updated_at',
@@ -17,7 +17,7 @@ export const PYME_PRODUCT: IMetadata<IPymeProductColumnsAliases, IPymeProductAss
       SUSPENDED_BY: 'suspended_by',
       SUSPENDED_REASON: 'suspended_reason',
    },
-   PLURAL: 'PymeProducts',
-   SINGULAR: 'PymeProduct',
+   PLURAL: 'PaymentTypes',
+   SINGULAR: 'PaymentType',
    ASSOCIATIONS: {},
 };
