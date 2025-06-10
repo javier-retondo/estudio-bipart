@@ -8,6 +8,8 @@ import { error } from './utils/network/responses';
 import docJson from '../documentation/api_v1.json';
 //import { apiLimiter } from './config/rateLimit';
 import { Routes } from './api/routes';
+import { readFileSync } from 'fs';
+import https from 'https';
 
 const staticFolderPath = path.join(__dirname, '..', 'public');
 
@@ -61,11 +63,33 @@ export class Server extends ConfigServer {
       }
    };
 
-   start() {
-      this.app.listen(this.port, () => {
-         console.log('The base URL is: ', this.apiBaseUrlV1);
-         console.log('Environment: ', this.getEnvironment('NODE_ENV'));
-         console.log('Server connected in port: ', this.port);
-      });
+   start(env: string = 'development') {
+      if (env === 'production') {
+         const options = {
+            key: readFileSync(
+               path.join('/etc/letsencrypt/live/nekoadmin.com.ar-0002/privkey.pem'),
+               'utf8',
+            ),
+            cert: readFileSync(
+               path.join('/etc/letsencrypt/live/nekoadmin.com.ar-0002/fullchain.pem'),
+               'utf8',
+            ),
+         };
+         console.log(
+            ' ruta cert',
+            path.join('/etc/letsencrypt/live/nekoadmin.com.ar-0002/privkey.pem'),
+         );
+         https.createServer(options, this.app).listen(this.app.get('port'), () => {
+            console.log('The base URL is: ', this.apiBaseUrlV1);
+            console.log('Environment: ', this.getEnvironment('NODE_ENV'));
+            console.log('Server connected in port: ', this.port);
+         });
+      } else {
+         this.app.listen(this.port, () => {
+            console.log('The base URL is: ', this.apiBaseUrlV1);
+            console.log('Environment: ', this.getEnvironment('NODE_ENV'));
+            console.log('Server connected in port: ', this.port);
+         });
+      }
    }
 }

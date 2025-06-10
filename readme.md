@@ -65,7 +65,7 @@ Ensure the following tools are installed:
 * For Production:
    ```bash
    docker build -t estudio-bipart-backend .
-   docker run  -p 3022:3022 --env-file .env estudio-bipart-backend
+   docker run  -p <port>:<port> --env-file .env estudio-bipart-backend
    ```
 
 ---
