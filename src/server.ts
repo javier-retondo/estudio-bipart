@@ -72,6 +72,8 @@ export class Server extends ConfigServer {
             return;
          }
          console.log('Starting server in production mode with SSL...');
+         console.log('SSL key path:', readFileSync(path.join(key), 'utf8'));
+         console.log('SSL cert path:', readFileSync(path.join(cert), 'utf8'));
          const options = {
             key: readFileSync(path.join(key), 'utf8'),
             cert: readFileSync(path.join(cert), 'utf8'),
