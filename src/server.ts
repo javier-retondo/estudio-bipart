@@ -65,20 +65,18 @@ export class Server extends ConfigServer {
 
    start(env: string = 'development') {
       if (env === 'production') {
+         const key = this.getEnvironment('KEY_PATH');
+         const cert = this.getEnvironment('CERT_PATH');
+         if (!key || !cert) {
+            console.error('SSL key or certificate path is not set in environment variables.');
+            return;
+         }
+         console.log('Starting server in production mode with SSL...');
          const options = {
-            key: readFileSync(
-               path.join('/etc/letsencrypt/live/nekoadmin.com.ar-0002/privkey.pem'),
-               'utf8',
-            ),
-            cert: readFileSync(
-               path.join('/etc/letsencrypt/live/nekoadmin.com.ar-0002/fullchain.pem'),
-               'utf8',
-            ),
+            key: readFileSync(path.join(key), 'utf8'),
+            cert: readFileSync(path.join(cert), 'utf8'),
          };
-         console.log(
-            ' ruta cert',
-            path.join('/etc/letsencrypt/live/nekoadmin.com.ar-0002/privkey.pem'),
-         );
+         console.log('Ruta cert', path.join(cert));
          https.createServer(options, this.app).listen(this.app.get('port'), () => {
             console.log('The base URL is: ', this.apiBaseUrlV1);
             console.log('Environment: ', this.getEnvironment('NODE_ENV'));
