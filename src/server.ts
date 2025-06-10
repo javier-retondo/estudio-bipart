@@ -67,8 +67,6 @@ export class Server extends ConfigServer {
       if (env === 'production') {
          const key = this.getEnvironment('KEY_PATH');
          const cert = this.getEnvironment('CERT_PATH');
-         // see the content of cert and key
-
          if (!key || !cert) {
             console.error('SSL key or certificate path is not set in environment variables.');
             return;
