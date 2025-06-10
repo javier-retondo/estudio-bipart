@@ -6,5 +6,6 @@ const server = new Server();
 (async () => {
    await server.handleConn();
    InitAllAssociations();
-   server.start();
+   const env = process.env.NODE_ENV || 'development';
+   server.start(env);
 })();
