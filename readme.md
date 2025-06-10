@@ -50,7 +50,6 @@ Ensure the following tools are installed:
 
       NODE_ENV=development
 
-      REDIS_PASSWORD=""
       REDIS_PORT=6379
       REDIS_HOST=
       REDIS_DATABASE=0
@@ -66,7 +65,7 @@ Ensure the following tools are installed:
 * For Production:
    ```bash
    docker build -t estudio-bipart-backend .
-   docker run estudio-bipart-backend
+   docker run  -p 3022:3022 --env-file .env estudio-bipart-backend
    ```
 
 ---
