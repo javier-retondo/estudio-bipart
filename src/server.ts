@@ -8,8 +8,6 @@ import { error } from './utils/network/responses';
 import docJson from '../documentation/api_v1.json';
 //import { apiLimiter } from './config/rateLimit';
 import { Routes } from './api/routes';
-import { readFileSync } from 'fs';
-import https from 'https';
 
 const staticFolderPath = path.join(__dirname, '..', 'public');
 
@@ -72,33 +70,11 @@ export class Server extends ConfigServer {
       }
    };
 
-   start(env: string = 'development') {
-      if (env === 'production') {
-         const key = this.getEnvironment('KEY_PATH');
-         const cert = this.getEnvironment('CERT_PATH');
-         if (!key || !cert) {
-            console.error('SSL key or certificate path is not set in environment variables.');
-            return;
-         }
-         console.log('Starting server in production mode with SSL...');
-         console.log('SSL key path:', readFileSync(path.join(key), 'utf8'));
-         console.log('SSL cert path:', readFileSync(path.join(cert), 'utf8'));
-         const options = {
-            key: readFileSync(path.join(key), 'utf8'),
-            cert: readFileSync(path.join(cert), 'utf8'),
-         };
-         console.log('Ruta cert', path.join(cert));
-         https.createServer(options, this.app).listen(this.app.get('port'), () => {
-            console.log('The base URL is: ', this.apiBaseUrlV1);
-            console.log('Environment: ', this.getEnvironment('NODE_ENV'));
-            console.log('Server connected in port: ', this.port);
-         });
-      } else {
-         this.app.listen(this.port, () => {
-            console.log('The base URL is: ', this.apiBaseUrlV1);
-            console.log('Environment: ', this.getEnvironment('NODE_ENV'));
-            console.log('Server connected in port: ', this.port);
-         });
-      }
+   start() {
+      this.app.listen(this.port, () => {
+         console.log('The base URL is: ', this.apiBaseUrlV1);
+         console.log('Environment: ', this.getEnvironment('NODE_ENV'));
+         console.log('Server connected in port: ', this.port);
+      });
    }
 }
