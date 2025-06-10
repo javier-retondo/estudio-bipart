@@ -36,6 +36,15 @@ export class Server extends ConfigServer {
    routes() {
       this.app.use('/static', express.static(staticFolderPath));
       // this.app.use(this.apiBaseUrlV1, apiLimiter);
+      // crear ruta de prueba
+      this.app.get('/', (req: Request, res: Response) => {
+         res.status(200).json({
+            message: 'Test route is working',
+            environment: this.getEnvironment('NODE_ENV'),
+            apiBaseUrl: this.apiBaseUrlV1,
+            port: this.port,
+         });
+      });
       this.app.use(this.apiBaseUrlV1, this.routers_v1());
       this.app.use(
          '/api/v1/documentation',
