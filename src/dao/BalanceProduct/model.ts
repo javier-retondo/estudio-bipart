@@ -22,6 +22,10 @@ Balance.init(
          type: DataTypes.INTEGER,
          allowNull: false,
       },
+      operative_client_id: {
+         type: DataTypes.INTEGER,
+         allowNull: false,
+      },
    },
    {
       sequelize: sequelize,

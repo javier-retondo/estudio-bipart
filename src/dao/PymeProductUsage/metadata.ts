@@ -13,8 +13,6 @@ export const PYME_PROD_USAGE: IMetadata<IPymeProdUsageColumnsAliases, IPymeProdU
          GROSS_INCOME_ID: 'gross_income_id',
          MONOTRIBUTIST_ID: 'monotributist_id',
          USER_ID: 'user_id',
-         DOMESTIC_SERVICE_ID: 'domestic_service_id',
-         BALANCE_PRODUCT_ID: 'balance_product_id',
       },
       PLURAL: 'PymeProdUsages',
       SINGULAR: 'PymeProdUsage',
@@ -26,6 +24,6 @@ export const PYME_PROD_USAGE: IMetadata<IPymeProdUsageColumnsAliases, IPymeProdU
          GROSS_INCOME: 'GrossIncome',
          MONOTRIBUTIST: 'Monotributist',
          DOMESTIC_SERVICE: 'DomesticService',
-         BALANCE_PRODUCT: 'BalanceProduct',
+         SOCIAL_SECURITY: 'SocialSecurity',
       },
    };

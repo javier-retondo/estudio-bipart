@@ -10,6 +10,7 @@ export const DOMESTIC_SERVICE: IMetadata<
       ID: 'id',
       COUNT: 'count',
       USER_ID: 'user_id',
+      PYME_PRODUCT_ID: 'pyme_product_usage_id',
    },
    PLURAL: 'DomesticServices',
    SINGULAR: 'DomesticService',

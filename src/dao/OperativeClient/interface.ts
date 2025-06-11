@@ -1,11 +1,5 @@
-import {
-   IBalance,
-   ICommercialClient,
-   IDomesticService,
-   IPymeProdUsage,
-   IRiskProduct,
-   ISocialSecurity,
-} from '../interfaces';
+import { IBalance, ICommercialClient, IPymeProdUsage, IRiskProduct } from '../interfaces';
+import { IPaymentType } from '../PaymentType/interface';
 
 export type IOperativeClient = {
    id?: number;
@@ -22,6 +16,7 @@ export type IOperativeClient = {
    is_system_product: boolean;
    is_society_product: boolean;
    is_physical_person_product: boolean;
+
    created_at?: Date;
    updated_at?: Date | null;
    deleted_at?: Date | null;
@@ -34,11 +29,10 @@ export type IOperativeClient = {
 
    // Associations
    CommercialClient?: ICommercialClient;
-   DomesticService?: IDomesticService;
-   SocialSecurity?: ISocialSecurity;
    RiskProduct?: IRiskProduct;
-   Balance?: IBalance;
+   BalanceProduct?: IBalance;
    PymeProduct?: IPymeProdUsage;
+   PaymentType?: IPaymentType;
 };
 
 type OperativeClientColumnAliasKeys =
@@ -46,6 +40,7 @@ type OperativeClientColumnAliasKeys =
    | 'FISCAL_NAME'
    | 'FISCAL_NUMBER'
    | 'IS_PHYSICAL_PERSON'
+   | 'ACTIVITY'
    | 'BORN_DATE'
    | 'OBSERVATIONS'
    | 'COMMERCIAL_CLIENT_ID'
@@ -70,9 +65,10 @@ export type IOperativeClientColumnsAliases = {
 
 type OperativeClientAssociationKeys =
    | 'COMMERCIAL_CLIENT'
-   | 'SOCIAL_SECURITY'
    | 'RISK_PRODUCT'
-   | 'PYME_PRODUCT';
+   | 'BALANCE_PRODUCT'
+   | 'PYME_PRODUCT'
+   | 'PAYMENT_TYPE';
 
 export type IOperativeClientAssociations = {
    [key in OperativeClientAssociationKeys]: keyof IOperativeClient;

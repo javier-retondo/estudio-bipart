@@ -7,6 +7,7 @@ import {
    CreateMonotributistaDTO,
    CreatePymeProductDTO,
    CreateTeamDTO,
+   OperativeClientsFilterDTO,
    UpdateCommercialClientDTO,
 } from './dto';
 import { clientServices } from './service';
@@ -28,6 +29,7 @@ import { pymeProductService } from '../../../dao/PymeProduct/service';
 import { divisionService } from '../../../dao/Division/service';
 import { grossIncomeService } from '../../../dao/GrossIncome/service';
 import { monotributistService } from '../../../dao/Monotributist/service';
+import { USER } from '../../../dao/metadata';
 
 export class ClientController {
    async createCommercialClient(req: Request, res: Response): Promise<void> {
@@ -130,10 +132,29 @@ export class ClientController {
    }
 
    async getOperativeClients(req: Request, res: Response): Promise<void> {
+      const filter: OperativeClientsFilterDTO = req.query;
       const commercialClientId = Number(req.params.Id);
+      const { page, pageSize, sortBy, sortDesc, status, search } = filter;
       await clientServices
-         .getOperativeClients(commercialClientId)
-         .then((body) => success({ req, res, body }))
+         .getOperativeClients(
+            { page, pageSize, sortBy, sortDesc, status, search },
+            commercialClientId,
+         )
+         .then((body) => {
+            let pagination = {
+               page: 1,
+               limit: body.count < PAGE_LIMIT ? body.count : PAGE_LIMIT,
+               total: body.count,
+            };
+            if (page && pageSize) {
+               pagination = {
+                  page: Number(page),
+                  limit: Number(pageSize),
+                  total: body.count,
+               };
+            }
+            success({ req, res, body: body.rows, pagination });
+         })
          .catch((err) => error({ req, res, body: err }));
    }
 
@@ -479,14 +500,114 @@ export class ClientController {
 
    async getUsers(req: Request, res: Response): Promise<void> {
       await userService
-         .getUsers({
-            page: 1,
-            pageSize: 100,
-            sortBy: 'username',
-            sortDesc: 'ASC',
-         })
+         .getUsers(
+            {
+               page: 1,
+               pageSize: 100,
+               sortBy: 'username',
+               sortDesc: 'ASC',
+            },
+            undefined,
+            [USER.COLUMNS.ID, USER.COLUMNS.USERNAME, USER.COLUMNS.FIRSTNAME, USER.COLUMNS.LASTNAME],
+         )
          .then((body) => {
             success({ req, res, body: body.rows });
          });
+   }
+
+   async createOperativeClient(req: Request, res: Response): Promise<void> {
+      const createOperativeClientDTO = req.body;
+      const userData: IUser = req.body.userData;
+      await clientServices
+         .createOperativeClient(createOperativeClientDTO, userData)
+         .then((body) => {
+            setImmediate(() => {
+               logService.create({
+                  type: LOG_TYPES.CREATE,
+                  user_id: Number(userData.id),
+                  description: `El usuario ${userData.firstname} ${userData.lastname} (ID: ${userData.id}) ha creado un nuevo cliente operativo: ${body.fiscal_name} (${body.fiscal_number})`,
+                  endpoint: req.originalUrl,
+                  method: req.method,
+                  date_time: new Date(),
+               });
+            });
+            success({ req, res, body });
+         })
+         .catch((err) => error({ req, res, body: err }));
+   }
+
+   async updateOperativeClient(req: Request, res: Response): Promise<void> {
+      const id = Number(req.params.Id);
+      const updateOperativeClientDTO = req.body;
+      const userData: IUser = req.body.userData;
+      await clientServices
+         .updateOperativeClient(id, updateOperativeClientDTO, userData)
+         .then((body) => {
+            setImmediate(() => {
+               logService.create({
+                  type: LOG_TYPES.UPDATE,
+                  user_id: Number(userData.id),
+                  description: `El usuario ${userData.firstname} ${userData.lastname} (ID: ${userData.id}) ha actualizado el cliente operativo: ${body.fiscal_name} (${body.fiscal_number})`,
+                  endpoint: req.originalUrl,
+                  method: req.method,
+                  date_time: new Date(),
+               });
+            });
+            success({ req, res, body });
+         })
+         .catch((err) => error({ req, res, body: err }));
+   }
+
+   async getOperativeClient(req: Request, res: Response): Promise<void> {
+      const id = Number(req.params.Id);
+      await clientServices
+         .getOperativeClient(id)
+         .then((body) => success({ req, res, body }))
+         .catch((err) => error({ req, res, body: err }));
+   }
+
+   async suspendUnsuspendOperativeClient(req: Request, res: Response): Promise<void> {
+      const id = Number(req.params.Id);
+      const userData = req.body.userData;
+      const reason = req.body.reason;
+      await clientServices
+         .suspendUnsuspendOperativeClient(id, userData, reason)
+         .then((body) => {
+            setImmediate(() => {
+               logService.create({
+                  type: LOG_TYPES.UPDATE,
+                  user_id: userData.id,
+                  description: `El usuario ${userData.username} ha ${
+                     body.suspended_at ? 'suspendido' : 'reanudado'
+                  } el cliente operativo: ${body.fiscal_name} (${body.fiscal_number})`,
+                  endpoint: req.originalUrl,
+                  method: req.method,
+                  date_time: new Date(),
+               });
+            });
+            success({ req, res, body });
+         })
+         .catch((err) => error({ req, res, body: err }));
+   }
+
+   async deleteOperativeClient(req: Request, res: Response): Promise<void> {
+      const id = Number(req.params.Id);
+      const userData = req.body.userData;
+      await clientServices
+         .softDeleteOperativeClient(id, userData)
+         .then((body) => {
+            setImmediate(() => {
+               logService.create({
+                  type: LOG_TYPES.DELETE,
+                  user_id: userData.id,
+                  description: `El usuario ${userData.username} ha eliminado el cliente operativo con ID: ${id}`,
+                  endpoint: req.originalUrl,
+                  method: req.method,
+                  date_time: new Date(),
+               });
+            });
+            success({ req, res, body });
+         })
+         .catch((err) => error({ req, res, body: err }));
    }
 }

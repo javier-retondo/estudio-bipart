@@ -13,7 +13,7 @@ const afip: Afip = new Afip({
    key: keyContent,
    cert: certificateContent,
    cuit: 20350925148,
-   ticketPath: join(__dirname, '..', 'public', 'arca', 'tickets'),
+   ticketPath: join(__dirname, '..', '..', '..', 'public', 'arca', 'tickets'),
    production: true,
 });
 

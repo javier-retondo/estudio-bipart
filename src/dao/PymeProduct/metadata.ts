@@ -6,6 +6,7 @@ export const PYME_PRODUCT: IMetadata<IPymeProductColumnsAliases, IPymeProductAss
    COLUMNS: {
       ID: 'id',
       NAME: 'pyme_prod_name',
+
       DESCRIPTION: 'description',
       CREATED_AT: 'created_at',
       UPDATED_AT: 'updated_at',

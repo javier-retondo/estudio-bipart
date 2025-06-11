@@ -11,6 +11,7 @@ export const OPERATIVE_CLIENT: IMetadata<
       FISCAL_NAME: 'fiscal_name',
       FISCAL_NUMBER: 'fiscal_number',
       IS_PHYSICAL_PERSON: 'is_physical_person',
+      ACTIVITY: 'activity',
       BORN_DATE: 'born_date',
       OBSERVATIONS: 'observations',
       COMMERCIAL_CLIENT_ID: 'commercial_client_id',
@@ -34,8 +35,9 @@ export const OPERATIVE_CLIENT: IMetadata<
    SINGULAR: 'OperativeClient',
    ASSOCIATIONS: {
       COMMERCIAL_CLIENT: 'CommercialClient',
-      SOCIAL_SECURITY: 'SocialSecurity',
       RISK_PRODUCT: 'RiskProduct',
       PYME_PRODUCT: 'PymeProduct',
+      BALANCE_PRODUCT: 'BalanceProduct',
+      PAYMENT_TYPE: 'PaymentType',
    },
 };

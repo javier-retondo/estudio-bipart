@@ -1,7 +1,7 @@
 import { sequelize } from '../../../config';
 import { commercialClientService } from '../../../dao/CommercialClient/service';
 import { IPermission, IUser } from '../../../dao/interfaces';
-import { COMMERCIAL_CLIENT } from '../../../dao/metadata';
+import { COMMERCIAL_CLIENT, USER } from '../../../dao/metadata';
 import { permissionService } from '../../../dao/Permission/service';
 import { userService } from '../../../dao/User/service';
 import { UsersFilterDTO, CreateUserDTO, UpdateUserDTO } from './dto';
@@ -94,6 +94,8 @@ class UserServices {
             sortDesc: sortDesc ? 'ASC' : 'DESC',
          },
          search,
+         undefined,
+         [USER.ASSOCIATIONS.PERMISSIONS, 'Modules'],
       );
    }
 

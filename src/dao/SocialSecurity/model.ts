@@ -14,15 +14,15 @@ SocialSecurity.init(
          primaryKey: true,
          autoIncrement: true,
       },
-      operative_client_id: {
-         type: DataTypes.INTEGER,
-         allowNull: false,
-      },
       count: {
          type: DataTypes.INTEGER,
          allowNull: false,
       },
       user_id: {
+         type: DataTypes.INTEGER,
+         allowNull: false,
+      },
+      pyme_product_usage_id: {
          type: DataTypes.INTEGER,
          allowNull: false,
       },

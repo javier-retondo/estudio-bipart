@@ -9,10 +9,29 @@ import { IUser } from './interface';
 import jwt from 'jsonwebtoken';
 import { redisClient } from '../../config/redisManager';
 import { moduleService } from '../Module/service';
-import { FindOptions, Transaction, WhereOptions } from 'sequelize';
+import { FindOptions, Includeable, Transaction, WhereOptions } from 'sequelize';
 import { Op } from 'sequelize';
 
 class UserService {
+   private getAllAttributes(attributesIncludes: (keyof IUser)[]): (keyof IUser)[] {
+      return Object.values(USER.COLUMNS).filter((column) => attributesIncludes.includes(column));
+   }
+   private getAllAssociations(includes: (keyof IUser)[]): Includeable[] {
+      return Object.values(USER.ASSOCIATIONS)
+         .filter((association) => includes.includes(association))
+         .map((association) => {
+            if (association === USER.ASSOCIATIONS.PERMISSIONS) {
+               return {
+                  model: Permission,
+                  as: association,
+                  required: false,
+               };
+            }
+            return undefined;
+         })
+         .filter((item) => item !== undefined);
+   }
+
    private async getUserModelById(id: number) {
       return await User.findByPk(id, {
          include: [
@@ -99,6 +118,8 @@ class UserService {
          sortDesc?: 'ASC' | 'DESC';
       },
       search?: string,
+      columns?: (keyof IUser)[],
+      associations?: (keyof IUser)[],
    ): Promise<{ count: number; rows: IUser[] }> {
       let where: WhereOptions<IUser> = { is_admin: false };
       if (search) {
@@ -113,22 +134,25 @@ class UserService {
             ],
          };
       }
+      const attributes: (keyof IUser)[] = this.getAllAttributes(
+         columns || Object.values(USER.COLUMNS),
+      );
+      const include: Includeable[] | undefined = associations
+         ? this.getAllAssociations(associations)
+         : undefined;
+
       const options: FindOptions = {
+         attributes,
          where,
          order: [[sortBy, sortDesc]],
          limit: pageSize,
          offset: (page - 1) * pageSize,
-         include: [
-            {
-               model: Permission,
-               as: USER.ASSOCIATIONS.PERMISSIONS,
-               required: false,
-               separate: true,
-            },
-         ],
+         include,
       };
 
-      const modules = await moduleService.getAllModules();
+      const modules = associations?.includes('Modules')
+         ? await moduleService.getAllModules()
+         : undefined;
 
       return await User.findAndCountAll(options).then((result) => {
          return {
@@ -136,9 +160,11 @@ class UserService {
             rows: result.rows.map((user) => {
                const userData = user.dataValues as IUser;
                delete userData.password;
-               userData.Modules = modules.filter((module) =>
-                  userData.Permissions?.some((permission) => permission.module_id === module.id),
-               );
+               userData.Modules =
+                  modules &&
+                  modules.filter((module) =>
+                     userData.Permissions?.some((permission) => permission.module_id === module.id),
+                  );
                return userData;
             }),
          };
