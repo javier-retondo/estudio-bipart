@@ -1,6 +1,7 @@
 import { DB_RESTRICTIONS } from '../../utils/constants/DB_RESTRICIONS';
-import { COMMERCIAL_CLIENT, PYME_PROD_USAGE, RISK_PRODUCT, SOCIAL_SECURITY } from '../metadata';
-import { CommercialClient, PymeProdUsage, RiskProduct, SocialSecurity } from '../models';
+import { BALANCE, COMMERCIAL_CLIENT, PYME_PROD_USAGE, RISK_PRODUCT } from '../metadata';
+import { Balance, CommercialClient, PaymentType, PymeProdUsage, RiskProduct } from '../models';
+import { PAYMENT_TYPE } from '../PaymentType/metadata';
 import { OPERATIVE_CLIENT } from './metadata';
 import { OperativeClient } from './model';
 
@@ -13,10 +14,10 @@ export const initOperativeClientAssociations = () => {
       as: OPERATIVE_CLIENT.ASSOCIATIONS.COMMERCIAL_CLIENT,
    });
 
-   OperativeClient.hasOne(SocialSecurity, {
-      foreignKey: SOCIAL_SECURITY.COLUMNS.OPERATIVE_CLIENT_ID,
+   OperativeClient.hasOne(Balance, {
+      foreignKey: BALANCE.COLUMNS.OPERATIVE_CLIENT_ID,
       sourceKey: OPERATIVE_CLIENT.COLUMNS.ID,
-      as: OPERATIVE_CLIENT.ASSOCIATIONS.SOCIAL_SECURITY,
+      as: OPERATIVE_CLIENT.ASSOCIATIONS.BALANCE_PRODUCT,
       onDelete: DB_RESTRICTIONS.CASCADE,
       onUpdate: DB_RESTRICTIONS.CASCADE,
    });
@@ -34,6 +35,14 @@ export const initOperativeClientAssociations = () => {
       sourceKey: OPERATIVE_CLIENT.COLUMNS.ID,
       as: OPERATIVE_CLIENT.ASSOCIATIONS.RISK_PRODUCT,
       onDelete: DB_RESTRICTIONS.CASCADE,
+      onUpdate: DB_RESTRICTIONS.CASCADE,
+   });
+
+   OperativeClient.belongsTo(PaymentType, {
+      foreignKey: OPERATIVE_CLIENT.COLUMNS.PAYMENT_TYPE_ID,
+      targetKey: PAYMENT_TYPE.COLUMNS.ID,
+      as: OPERATIVE_CLIENT.ASSOCIATIONS.PAYMENT_TYPE,
+      onDelete: DB_RESTRICTIONS.RESTRICT,
       onUpdate: DB_RESTRICTIONS.CASCADE,
    });
 };

@@ -42,14 +42,6 @@ PymeProdUsage.init(
          type: DataTypes.INTEGER,
          allowNull: false,
       },
-      domestic_service_id: {
-         type: DataTypes.INTEGER,
-         allowNull: true,
-      },
-      balance_product_id: {
-         type: DataTypes.INTEGER,
-         allowNull: true,
-      },
    },
    {
       sequelize: sequelize,

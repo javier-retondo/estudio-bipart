@@ -2,15 +2,14 @@ import { IUser } from '../interfaces';
 
 export type ISocialSecurity = {
    id?: number;
-   operative_client_id: number;
    count: number;
    user_id: number;
-
+   pyme_product_usage_id: number;
    // Associations
    User?: IUser;
 };
 
-type SocialSecurityColumnAliasKeys = 'ID' | 'OPERATIVE_CLIENT_ID' | 'COUNT' | 'USER_ID';
+type SocialSecurityColumnAliasKeys = 'ID' | 'COUNT' | 'USER_ID' | 'PYME_PRODUCT_ID';
 export type ISocialSecurityColumnsAliases = {
    [key in SocialSecurityColumnAliasKeys]: keyof ISocialSecurity;
 };

@@ -1,10 +1,10 @@
 import {
-   IBalance,
    IDivision,
    IDomesticService,
    IGrossIncome,
    IMonotributist,
    IPymeProduct,
+   ISocialSecurity,
    ITeam,
    IUser,
 } from '../interfaces';
@@ -18,8 +18,6 @@ export type IPymeProdUsage = {
    gross_income_id: number;
    monotributist_id: number;
    user_id: number;
-   domestic_service_id?: number;
-   balance_product_id?: number;
 
    // Associations
    User?: IUser;
@@ -28,8 +26,9 @@ export type IPymeProdUsage = {
    Division?: IDivision;
    GrossIncome?: IGrossIncome;
    Monotributist?: IMonotributist;
+
    DomesticService?: IDomesticService;
-   BalanceProduct?: IBalance;
+   SocialSecurity?: ISocialSecurity;
 };
 
 type PymeProdUsageColumnAliasKeys =
@@ -40,9 +39,7 @@ type PymeProdUsageColumnAliasKeys =
    | 'DIVISION_ID'
    | 'GROSS_INCOME_ID'
    | 'MONOTRIBUTIST_ID'
-   | 'USER_ID'
-   | 'DOMESTIC_SERVICE_ID'
-   | 'BALANCE_PRODUCT_ID';
+   | 'USER_ID';
 export type IPymeProdUsageColumnsAliases = {
    [key in PymeProdUsageColumnAliasKeys]: keyof IPymeProdUsage;
 };
@@ -55,7 +52,7 @@ type PymeProdUsageAssociationsKeys =
    | 'GROSS_INCOME'
    | 'MONOTRIBUTIST'
    | 'DOMESTIC_SERVICE'
-   | 'BALANCE_PRODUCT';
+   | 'SOCIAL_SECURITY';
 
 export type IPymeProdUsageAssociations = {
    [key in PymeProdUsageAssociationsKeys]: keyof IPymeProdUsage;

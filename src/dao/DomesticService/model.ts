@@ -22,6 +22,10 @@ DomesticService.init(
          type: DataTypes.INTEGER,
          allowNull: false,
       },
+      pyme_product_usage_id: {
+         type: DataTypes.INTEGER,
+         allowNull: false,
+      },
    },
    {
       sequelize: sequelize,

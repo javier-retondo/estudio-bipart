@@ -1,20 +1,20 @@
 import {
-   BALANCE,
    DIVISION,
    DOMESTIC_SERVICE,
    GROSS_INCOME,
    MONOTRIBUTIST,
    PYME_PRODUCT,
+   SOCIAL_SECURITY,
    TEAM,
    USER,
 } from '../metadata';
 import {
-   Balance,
    Division,
    DomesticService,
    GrossIncome,
    Monotributist,
    PymeProduct,
+   SocialSecurity,
    Team,
    User,
 } from '../models';
@@ -59,15 +59,15 @@ export const initPymeProductUsageAssociations = () => {
       as: PYME_PROD_USAGE.ASSOCIATIONS.USER,
    });
 
-   PymeProdUsage.belongsTo(Balance, {
-      foreignKey: PYME_PROD_USAGE.COLUMNS.BALANCE_PRODUCT_ID,
-      targetKey: BALANCE.COLUMNS.ID,
-      as: PYME_PROD_USAGE.ASSOCIATIONS.BALANCE_PRODUCT,
+   PymeProdUsage.hasOne(DomesticService, {
+      foreignKey: DOMESTIC_SERVICE.COLUMNS.PYME_PRODUCT_ID,
+      sourceKey: PYME_PROD_USAGE.COLUMNS.ID,
+      as: PYME_PROD_USAGE.ASSOCIATIONS.DOMESTIC_SERVICE,
    });
 
-   PymeProdUsage.belongsTo(DomesticService, {
-      foreignKey: PYME_PROD_USAGE.COLUMNS.DOMESTIC_SERVICE_ID,
-      targetKey: DOMESTIC_SERVICE.COLUMNS.ID,
-      as: PYME_PROD_USAGE.ASSOCIATIONS.DOMESTIC_SERVICE,
+   PymeProdUsage.hasOne(SocialSecurity, {
+      foreignKey: SOCIAL_SECURITY.COLUMNS.PYME_PRODUCT_ID,
+      sourceKey: PYME_PROD_USAGE.COLUMNS.ID,
+      as: PYME_PROD_USAGE.ASSOCIATIONS.SOCIAL_SECURITY,
    });
 };

@@ -8,9 +8,9 @@ export const SOCIAL_SECURITY: IMetadata<
    TABLE: 'social_security',
    COLUMNS: {
       ID: 'id',
-      OPERATIVE_CLIENT_ID: 'operative_client_id',
       COUNT: 'count',
       USER_ID: 'user_id',
+      PYME_PRODUCT_ID: 'pyme_product_usage_id',
    },
    PLURAL: 'SocialSecurities',
    SINGULAR: 'SocialSecurity',

@@ -1,7 +1,6 @@
 import { BaseRouter } from '../../../abstractions/baseRouter';
 import { ClientController } from './controller';
 import {
-   CommercialClientIdDTO,
    CreateCommercialClientDTO,
    UpdateCommercialClientDTO,
    CommercialClientsFilterDTO,
@@ -12,6 +11,9 @@ import {
    CreateDivisionDTO,
    CreateGrossIncomeDTO,
    CreateMonotributistaDTO,
+   CreateOperativeClientDTO,
+   ClientIdDTO,
+   OperativeClientsFilterDTO,
 } from './dto';
 import { ClientMiddleware } from './middleware';
 
@@ -35,8 +37,9 @@ export class ClientRouter extends BaseRouter<
          .get(
             this.routesNames.SINGULAR + '/commercial/:Id/clients/operative',
             this.middleware.verifyToken,
-            this.middleware.validationMiddleware(CommercialClientIdDTO, 'params'),
-            this.middleware.checkClientId(),
+            this.middleware.validationMiddleware(ClientIdDTO, 'params'),
+            this.middleware.validationMiddleware(OperativeClientsFilterDTO, 'query'),
+            this.middleware.checkClientId('commercial'),
             this.controller.getOperativeClients,
          )
          .get(
@@ -48,8 +51,8 @@ export class ClientRouter extends BaseRouter<
          .get(
             this.routesNames.SINGULAR + '/commercial/:Id',
             this.middleware.verifyToken,
-            this.middleware.validationMiddleware(CommercialClientIdDTO, 'params'),
-            this.middleware.checkClientId(),
+            this.middleware.validationMiddleware(ClientIdDTO, 'params'),
+            this.middleware.checkClientId('commercial'),
             this.controller.getCommercialClient,
          )
          .post(
@@ -62,25 +65,25 @@ export class ClientRouter extends BaseRouter<
          .put(
             this.routesNames.SINGULAR + '/commercial/:Id',
             this.middleware.verifyToken,
-            this.middleware.validationMiddleware(CommercialClientIdDTO, 'params'),
+            this.middleware.validationMiddleware(ClientIdDTO, 'params'),
             this.middleware.validationMiddleware(UpdateCommercialClientDTO, 'body'),
-            this.middleware.checkClientId(),
+            this.middleware.checkClientId('commercial'),
             this.middleware.checkClientFiscalNumber(),
             this.controller.updateCommercialClient,
          )
          .put(
             this.routesNames.SINGULAR + '/commercial/:Id/suspend',
             this.middleware.verifyToken,
-            this.middleware.validationMiddleware(CommercialClientIdDTO, 'params'),
+            this.middleware.validationMiddleware(ClientIdDTO, 'params'),
             this.middleware.validationMiddleware(SuspendCommercialClientDTO, 'body'),
-            this.middleware.checkClientId(),
+            this.middleware.checkClientId('commercial'),
             this.controller.suspendUnsuspendCommercialClient,
          )
          .delete(
             this.routesNames.SINGULAR + '/commercial/:Id',
             this.middleware.verifyToken,
-            this.middleware.validationMiddleware(CommercialClientIdDTO, 'params'),
-            this.middleware.checkClientId(),
+            this.middleware.validationMiddleware(ClientIdDTO, 'params'),
+            this.middleware.checkClientId('commercial'),
             this.controller.deleteCommercialClient,
          )
 
@@ -186,7 +189,42 @@ export class ClientRouter extends BaseRouter<
             this.middleware.verifyToken,
             this.controller.getUsers,
          )
-
+         .get(
+            this.routesNames.SINGULAR + '/operative/:Id',
+            this.middleware.verifyToken,
+            this.middleware.validationMiddleware(ClientIdDTO, 'params'),
+            this.middleware.checkClientId('operative'),
+            this.controller.getOperativeClient,
+         )
+         .post(
+            this.routesNames.SINGULAR + '/operative',
+            this.middleware.verifyToken,
+            this.middleware.validationMiddleware(CreateOperativeClientDTO, 'body'),
+            this.controller.createOperativeClient,
+         )
+         .put(
+            this.routesNames.SINGULAR + '/operative/:Id',
+            this.middleware.verifyToken,
+            this.middleware.validationMiddleware(ClientIdDTO, 'params'),
+            this.middleware.validationMiddleware(CreateOperativeClientDTO, 'body'),
+            this.middleware.checkClientId('operative'),
+            this.controller.updateOperativeClient,
+         )
+         .put(
+            this.routesNames.SINGULAR + '/operative/:Id/suspend',
+            this.middleware.verifyToken,
+            this.middleware.validationMiddleware(ClientIdDTO, 'params'),
+            this.middleware.validationMiddleware(SuspendCommercialClientDTO, 'body'),
+            this.middleware.checkClientId('operative'),
+            this.controller.suspendUnsuspendOperativeClient,
+         )
+         .delete(
+            this.routesNames.SINGULAR + '/operative/:Id',
+            this.middleware.verifyToken,
+            this.middleware.validationMiddleware(ClientIdDTO, 'params'),
+            this.middleware.checkClientId('operative'),
+            this.controller.deleteOperativeClient,
+         )
          // General Client Routes
          .get(
             this.routesNames.SINGULAR + '/data/fiscal/:fiscal_number',
