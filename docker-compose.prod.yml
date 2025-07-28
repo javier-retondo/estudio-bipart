@@ -28,6 +28,3 @@ services:
 networks:
    estudio-bi-part-network:
       driver: bridge
-
-volumes:
-   postgres_data:
