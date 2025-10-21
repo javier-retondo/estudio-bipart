@@ -17,6 +17,11 @@ services:
          - redis
       networks:
          - estudio-bi-part-network
+      deploy:
+         resources:
+            limits:
+               cpus: '0.5'
+               memory: '400m'
 
    redis:
       image: redis:alpine
@@ -24,6 +29,11 @@ services:
          - '6379:6379'
       networks:
          - estudio-bi-part-network
+      deploy:
+         resources:
+            limits:
+               cpus: '0.25'
+               memory: '150m'
 
 networks:
    estudio-bi-part-network:
