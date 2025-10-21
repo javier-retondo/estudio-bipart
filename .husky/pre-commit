@@ -1,4 +1,9 @@
-#!/usr/bin/env sh
+#!/bin/sh
+# husky
+
 . "$(dirname -- "$0")/_/husky.sh"
 
-npx lint-staged
+echo "Ejecutando pre-commit hook..."
+
+npm run lint || exit 1
+npm run format || exit 1
